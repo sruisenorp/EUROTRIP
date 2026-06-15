@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de Viaje · Europa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1a2744;
+    --navy-light: #2a3d6e;
+    --gold: #c8a97e;
+    --gold-dark: #a0824f;
+    --terracotta: #b45c36;
+    --cream: #f7f4ef;
+    --cream-dark: #ede9e2;
+    --white: #ffffff;
+    --text-main: #1e1e1e;
+    --text-muted: #777;
+    --text-light: #aaa;
+    --border: #e0ddd6;
+    --green: #4a7c59;
+    --purple: #7b4fa6;
+    --sidebar-w: 300px;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text-main); min-height: 100vh; }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(200,169,126,0.08) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 20%, rgba(200,169,126,0.06) 0%, transparent 40%);
+  }
+  .hero-inner { position: relative; max-width: 600px; margin: 0 auto; }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { font-size: 14px; color: rgba(255,255,255,0.5); font-weight: 300; }
+
+  /* LAYOUT */
+  .layout { display: flex; min-height: calc(100vh - 160px); }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: var(--sidebar-w);
+    min-width: var(--sidebar-w);
+    background: var(--white);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar-section { padding: 1.25rem; border-bottom: 1px solid var(--border); }
+  .sidebar-label {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    font-weight: 600;
+    margin-bottom: 0.875rem;
+  }
+
+  /* CITY GRID */
+  .city-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .city-btn {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.625rem 0.5rem;
+    background: var(--white);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.18s ease;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    user-select: none;
+  }
+  .city-btn:hover { background: var(--cream); border-color: var(--gold); transform: translateY(-1px); }
+  .city-btn.active { background: var(--navy); border-color: var(--navy); }
+  .city-btn .flag { font-size: 17px; line-height: 1; }
+  .city-btn .city-info .city-name { font-size: 12.5px; font-weight: 500; color: var(--text-main); display: block; }
+  .city-btn.active .city-name { color: #fff; }
+  .city-btn .city-info .country { font-size: 10px; color: var(--text-light); display: block; }
+  .city-btn.active .country { color: rgba(255,255,255,0.5); }
+
+  /* FILTER CHIPS */
+  .filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 11px;
+    font-size: 11.5px;
+    background: var(--white);
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    user-select: none;
+    font-family: 'Inter', sans-serif;
+  }
+  .chip:hover { border-color: var(--gold); color: var(--text-main); }
+  .chip.active { background: var(--gold); border-color: var(--gold); color: #fff; }
+  .chip svg { width: 13px; height: 13px; }
+
+  /* DAY TABS */
+  .day-tabs-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .day-tab {
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 5px 13px;
+    font-size: 12px;
+    background: var(--white);
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.15s;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+  .day-tab:hover { border-color: var(--terracotta); color: var(--text-main); }
+  .day-tab.active { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
+
+  /* MAIN PANEL */
+  .main-panel { flex: 1; overflow-y: auto; }
+
+  .city-header {
+    padding: 1.75rem 2.5rem 1.5rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  .city-header-row { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+  .city-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    color: var(--navy);
+  }
+  .city-country-badge {
+    font-size: 12px;
+    color: var(--text-light);
+    background: var(--cream);
+    padding: 3px 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  .city-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; max-width: 560px; }
+  .city-meta { display: flex; gap: 1.25rem; margin-top: 0.875rem; }
+  .meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-muted); }
+  .meta-icon { color: var(--gold); font-size: 14px; }
+
+  /* STOPS */
+  .stops-area { padding: 1.75rem 2.5rem; }
+  .day-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .day-heading::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .stop-card {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-bottom: 10px;
+    transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    overflow: hidden;
+  }
+  .stop-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+
+  .stop-inner { display: flex; align-items: flex-start; padding: 1rem 1.25rem; gap: 1rem; }
+
+  .stop-time { min-width: 50px; text-align: right; padding-top: 2px; }
+  .stop-time-main { font-size: 13px; font-weight: 600; color: var(--navy); display: block; }
+  .stop-time-period { font-size: 10px; color: var(--text-light); display: block; }
+
+  .dot-col { display: flex; flex-direction: column; align-items: center; padding-top: 4px; }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot.food { background: var(--gold); }
+  .dot.culture { background: var(--navy); }
+  .dot.nature { background: var(--green); }
+  .dot.nightlife { background: var(--purple); }
+  .dot.shopping { background: var(--terracotta); }
+
+  .stop-body { flex: 1; min-width: 0; }
+  .stop-name { font-size: 14px; font-weight: 500; color: var(--text-main); margin-bottom: 3px; }
+  .stop-detail { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+
+  .stop-badge {
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 10px;
+    font-weight: 500;
+    white-space: nowrap;
+    align-self: flex-start;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .stop-badge.food { background: #fdf3e7; color: #8a5f1e; border: 1px solid #e8d4a0; }
+  .stop-badge.culture { background: #eef0f6; color: #1a2744; border: 1px solid #c0c8de; }
+  .stop-badge.nature { background: #edf5f0; color: #2e6040; border: 1px solid #a8d4b8; }
+  .stop-badge.nightlife { background: #f4eefb; color: #5a2e8a; border: 1px solid #c8aae8; }
+  .stop-badge.shopping { background: #faeee9; color: #7a3018; border: 1px solid #e0b09a; }
+
+  .tip-box {
+    margin: 0 2.5rem 2rem;
+    background: #fff8ee;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    padding: 0.875rem 1.125rem;
+  }
+  .tip-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; margin-bottom: 4px; }
+  .tip-box p { font-size: 12.5px; color: #7a5a2e; line-height: 1.55; }
+
+  .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-light); }
+  .empty-state .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+  .empty-state p { font-size: 14px; }
+
+  /* COMING SOON BADGE */
+  .coming-soon {
+    font-size: 9px;
+    background: var(--cream-dark);
+    color: var(--text-light);
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 2px;
+    display: inline-block;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .layout { flex-direction: column; }
+    .sidebar { width: 100%; min-width: 100%; height: auto; position: relative; }
+    .city-header { position: relative; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">guía de viaje · europa</p>
+    <h1>Descubre <em>Europa</em><br>a tu ritmo</h1>
+    <p class="hero-sub">Itinerarios curados por ciudad, restaurantes, cultura y más</p>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <p class="sidebar-label">Destinos</p>
+      <div class="city-grid" id="cityGrid"></div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Filtrar por categoría</p>
+      <div class="filter-chips" id="filterChips">
+        <div class="chip active" data-filter="all">🌍 Todo</div>
+        <div class="chip" data-filter="food">🍽 Gastronomía</div>
+        <div class="chip" data-filter="culture">🏛 Cultura</div>
+        <div class="chip" data-filter="nature">🏔 Naturaleza</div>
+        <div class="chip" data-filter="nightlife">🌙 Vida nocturna</div>
+        <div class="chip" data-filter="shopping">🛍 Shopping</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Día del itinerario</p>
+      <div class="day-tabs-row" id="dayTabs"></div>
+    </div>
+  </aside>
+
+  <main class="main-panel">
+    <div class="city-header" id="cityHeader"></div>
+    <div class="stops-area" id="stopsArea"></div>
+    <div class="tip-box" id="tipBox" style="display:none">
+      <p class="tip-label">💡 Tip local</p>
+      <p id="tipText"></p>
+    </div>
+  </main>
+</div>
+
+<script>
+const cities = [
+  {
+    id: 'barcelona', name: 'Barcelona', country: 'España', flag: '🇪🇸',
+    desc: 'La ciudad de Gaudí, la playa y las tapas. Un mix perfecto de arquitectura, cultura y vida mediterránea.',
+    bestTime: 'May–Sep', avgTemp: '22°C', currency: 'Euro',
+    days: [
+      {
+        label: 'Día 1', theme: 'Gaudí y el casco antiguo',
+        tip: 'Reserva la Sagrada Família con anticipación — las entradas se agotan semanas antes. La mejor hora es el amanecer para la luz natural.',
+        stops: [
+          { time: '8:30', period: 'AM', name: 'Federal Café', detail: 'Desayuno australiano en el Raval. Prueba el smashed avo y el flat white.', type: 'food' },
+          { time: '10:00', period: 'AM', name: 'Sagrada Família', detail: 'La obra maestra inacabada de Gaudí. Reserva entradas con torres — vale la pena la vista desde arriba.', type: 'culture' },
+          { time: '13:00', period: 'PM', name: 'Bar del Pla', detail: 'Tapas clásicas catalanas en el Born. Pide las croquetas de jamón y el pan con tomate.', type: 'food' },
+          { time: '15:00', period: 'PM', name: 'Barrio Gótico', detail: 'Callejuelas medievales, la Catedral de Barcelona y la Plaza Real. Perfecto para perderse.', type: 'culture' },
+          { time: '17:30', period: 'PM', name: 'Park Güell', detail: 'Mosaicos de colores y vistas panorámicas de la ciudad. El área monumental requiere ticket.', type: 'nature' },
+          { time: '21:00', period: 'PM', name: 'El Xampanyet', detail: 'Bar clásico del Born para cava y pintxos. Ambiente auténtico barcelonés.', type: 'nightlife' }
+        ]
+      },
+      {
+        label: 'Día 2', theme: 'Playa, Paseo de Gracia y Eixample',
+        tip: 'El Paseo de Gracia tiene el mejor helado de la ciudad en Rocambolesc (de los hermanos Roca). No te lo pierdas.',
+        stops: [
+          { time: '9:00', period: 'AM', name: 'Barceloneta', detail: 'Paseo matutino por la playa y el Puerto Olímpico. Tranquilo antes del mediodía.', type: 'nature' },
+          { time: '11:00', period: 'AM', name: 'La Boqueria', detail: 'Mercado icónico de Las Ramblas. Para desayunar zumos frescos o comprar jamón y quesos.', type: 'food' },
+          { time: '13:30', period: 'PM', name: 'Cervecería Catalana', detail: 'El mejor brunch-almuerzo del Eixample. Reserva con anticipación o llega antes de abrir.', type: 'food' },
+          { time: '15:30', period: 'PM', name: 'Casa Batlló / La Pedrera', detail: 'Dos edificios Gaudí en el mismo paseo. Elige uno para entrar — La Pedrera tiene mejor rooftop.', type: 'culture' },
+          { time: '18:00', period: 'PM', name: 'Paseo de Gracia', detail: 'El boulevard de lujo de Barcelona. Zara, Mango, Massimo Dutti y marcas internacionales.', type: 'shopping' },
+          { time: '22:00', period: 'PM', name: 'Opium / CDLC', detail: 'Clubs frente al mar del Puerto Olímpico. Ambiente internacional y buena música house.', type: 'nightlife' }
+        ]
+      },
+      {
+        label: 'Día 3', theme: 'Montserrat y mercadillos',
+        tip: 'Si vas a Montserrat, sal temprano. El tren de FGC sale de Plza. España. Lleva snacks — los restaurantes allí son caros.',
+        stops: [
+          { time: '8:00', period: 'AM', name: 'Montserrat (excursión)', detail: 'Montaña sagrada a 1h de Barcelona. Monasterio benedictino, senderismo y vistas impresionantes.', type: 'nature' },
+          { time: '14:00', period: 'PM', name: 'El Nacional', detail: 'Cuatro restaurantes y cuatro bares bajo un mismo techo. La versión gourmet del mercado gastronómico.', type: 'food' },
+          { time: '16:30', period: 'PM', name: 'El Raval / MACBA', detail: 'Barrio bohemio con arte callejero, el MACBA y tiendas vintage.', type: 'culture' },
+          { time: '19:00', period: 'PM', name: 'Mercado del Born', detail: 'Market de diseño independiente y ropa vintage en el Born.', type: 'shopping' },
+          { time: '21:30', period: 'PM', name: 'Tickets (Albert Adrià)', detail: 'Bar de tapas de vanguardia del hermano de Ferran Adrià. Reserva con 2 meses de anticipación.', type: 'food' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'madrid', name: 'Madrid', country: 'España', flag: '🇪🇸',
+    desc: 'Capital vibrante con los mejores museos de Europa, tapas de madrugada y parques enormes.',
+    bestTime: 'Abr–Jun, Sep–Nov', avgTemp: '19°C', currency: 'Euro',
+    days: [
+      {
+        label: 'Día 1', theme: 'El Prado y los tapas clásicos',
+        tip: 'El Museo del Prado es gratis las últimas 2 horas del día. Para tapas, la zona de La Latina es el epicentro los domingos.',
+        stops: [
+          { time: '9:00', period: 'AM', name: 'Mercado de San Miguel', detail: 'Desayuno de vermut y croquetas en el mercado gourmet frente al Palacio Real.', type: 'food' },
+          { time: '11:00', period: 'AM', name: 'Museo del Prado', detail: 'Velázquez, Goya y El Greco. Uno de los mejores museos del mundo. Reserva 3 horas mínimo.', type: 'culture' },
+          { time: '14:30', period: 'PM', name: 'Lateral (Paseo del Prado)', detail: 'Cocina mediterránea clásica. Vistas al bulevar. Perfecto para comer después del museo.', type: 'food' },
+          { time: '16:30', period: 'PM', name: 'Retiro y el Palacio de Cristal', detail: 'El pulmón verde de Madrid. Alquila un bote en el estanque y visita el invernadero victoriano.', type: 'nature' },
+          { time: '19:00', period: 'PM', name: 'La Latina', detail: 'El barrio de tapas por excelencia. La Cava Baja es la calle clave. Prueba Casa Lucio.', type: 'food' },
+          { time: '23:00', period: 'PM', name: 'Lola Club / Kapital', detail: 'La noche madrileña empieza después de las 11. Kapital tiene 7 pisos con distintos ambientes.', type: 'nightlife' }
+        ]
+      },
+      {
+        label: 'Día 2', theme: 'Arte contemporáneo y Malasaña',
+        tip: 'El Reina Sofía tiene el Guernica de Picasso — la sala está siempre llena, mejor llegar en la mañana.',
+        stops: [
+          { time: '10:00', period: 'AM', name: 'Museo Reina Sofía', detail: 'Arte español del siglo XX. El Guernica de Picasso es el imprescindible absoluto.', type: 'culture' },
+          { time: '13:00', period: 'PM', name: 'Bodega de la Ardosa', detail: 'Bar histórico de Malasaña con las mejores patatas bravas de Madrid. De pie, sin pretensiones.', type: 'food' },
+          { time: '15:00', period: 'PM', name: 'Malasaña', detail: 'El barrio más hipster de Madrid. Tiendas vintage, cafés, murales. La plaza del Dos de Mayo es el centro.', type: 'shopping' },
+          { time: '17:30', period: 'PM', name: 'Museo Thyssen-Bornemisza', detail: 'La colección privada más grande de Europa. Impresionismo, expresionismo y arte flamenco.', type: 'culture' },
+          { time: '20:30', period: 'PM', name: 'Chueca', detail: 'Barrio cosmopolita y animado. Los mejores cócteles del centro en El Cock o Salmon Gurú.', type: 'nightlife' },
+          { time: '22:30', period: 'PM', name: 'DiverXO (si el presupuesto da)', detail: 'Tres estrellas Michelin de David Muñoz. Reserva imposible — pero si logras mesa, experiencia de vida.', type: 'food' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'roma', name: 'Roma', country: 'Italia', flag: '🇮🇹',
+    desc: 'La Ciudad Eterna. Ruinas milenarias, pasta perfecta, y la sensación de caminar por la historia.',
+    bestTime: 'Abr–Jun, Sep–Oct', avgTemp: '20°C', currency: 'Euro',
+    days: [
+      {
+        label: 'Día 1', theme: 'El Vaticano y el Trastevere',
+        tip: 'Los Museos Vaticanos son obligatorios con reserva previa. El miércoles el Papa da audiencia pública en la Plaza de San Pedro — es gratis.',
+        stops: [
+          { time: '7:30', period: 'AM', name: 'Bar San Calisto', detail: 'Desayuno romano clásico: cappuccino y cornetto. En Trastevere, la zona más auténtica de Roma.', type: 'food' },
+          { time: '9:00', period: 'AM', name: 'Museos Vaticanos + Capilla Sixtina', detail: 'El techo de Miguel Ángel. Reserva con semanas de anticipación. Tour guiado recomendado.', type: 'culture' },
+          { time: '13:00', period: 'PM', name: 'Pizzarium (Bonci)', detail: 'La pizza al taglio más famosa del mundo. En el barrio Prati, cerca del Vaticano.', type: 'food' },
+          { time: '15:00', period: 'PM', name: "Castel Sant'Angelo", detail: 'El mausoleo romano que se convirtió en fortaleza papal. Vista espectacular del Tíber.', type: 'culture' },
+          { time: '17:30', period: 'PM', name: 'Trastevere', detail: 'El barrio más romántico de Roma. Callejuelas de adoquines, hiedra en las paredes y plazas animadas.', type: 'nature' },
+          { time: '20:30', period: 'PM', name: 'Da Enzo al 29', detail: 'Trattoria romana auténtica en Trastevere. Cacio e pepe y carbonara como deben ser.', type: 'food' }
+        ]
+      },
+      {
+        label: 'Día 2', theme: 'Coliseo, Foro Romano y Fontana di Trevi',
+        tip: 'Compra el ticket combinado Coliseo + Foro Romano + Palatino. Reserva online con al menos 3 días de anticipación.',
+        stops: [
+          { time: '8:00', period: 'AM', name: 'Coliseo', detail: 'El anfiteatro más famoso del mundo. Llega temprano para evitar las multitudes.', type: 'culture' },
+          { time: '10:30', period: 'AM', name: 'Foro Romano y Palatino', detail: 'El corazón de la Roma antigua. Caminas literalmente sobre los cimientos del Imperio.', type: 'culture' },
+          { time: '13:30', period: 'PM', name: 'Hostaria Romana', detail: 'Cerca del Foro, pasta al dente y saltimbocca. Almuerzo clásico romano sin trampa turística.', type: 'food' },
+          { time: '15:30', period: 'PM', name: 'Fontana di Trevi', detail: 'La fuente más famosa del mundo. Lanza tu moneda de espaldas. Mejor a media tarde.', type: 'culture' },
+          { time: '17:00', period: 'PM', name: 'Piazza Navona', detail: 'Tres fuentes de Bernini en una plaza barroca perfecta. Los artistas callejeros dan vida al lugar.', type: 'culture' },
+          { time: '19:30', period: 'PM', name: "Campo de' Fiori", detail: 'La plaza de mercado que se transforma en bar a cielo abierto. Aperitivo en Er Buchetto.', type: 'nightlife' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'mallorca', name: 'Mallorca', country: 'España', flag: '🇪🇸',
+    desc: 'La isla mediterránea ideal: calas cristalinas, gastronomía mallorquina y vida de playa sin complicaciones.',
+    bestTime: 'May–Oct', avgTemp: '24°C', currency: 'Euro',
+    days: [
+      {
+        label: 'Día 1', theme: 'Palma y el casco antiguo',
+        tip: 'Alquila una moto o scooter para la isla — la conectividad en transporte público es limitada fuera de Palma.',
+        stops: [
+          { time: '9:30', period: 'AM', name: "Mercat de l'Olivar", detail: 'El mercado central de Palma. Desayuno con ensaimadas recién horneadas y zumo de naranja.', type: 'food' },
+          { time: '11:00', period: 'AM', name: 'Catedral de Mallorca (La Seu)', detail: 'Gótica y con vitrales de Gaudí. Impresionante desde el paseo marítimo.', type: 'culture' },
+          { time: '13:00', period: 'PM', name: 'Celler Sa Premsa', detail: 'La bodega-restaurante más clásica de Palma. Frito mallorquín y vinos locales.', type: 'food' },
+          { time: '16:00', period: 'PM', name: 'Playa de Palma / Cala Major', detail: 'Las playas más accesibles desde Palma. Arena fina y aguas claras mediterráneas.', type: 'nature' },
+          { time: '19:00', period: 'PM', name: 'Paseo del Born', detail: 'El boulevard de Palma para el paseo de la tarde. Tiendas, bares y ambiente local.', type: 'shopping' },
+          { time: '22:00', period: 'PM', name: 'Pacha Mallorca', detail: 'El club más icónico de la isla. Los martes y viernes son las mejores noches.', type: 'nightlife' }
+        ]
+      },
+      {
+        label: 'Día 2', theme: 'Calas del norte y Tramuntana',
+        tip: 'La carretera de la Serra de Tramuntana es Patrimonio UNESCO — conduce despacio y para en cada mirador.',
+        stops: [
+          { time: '8:00', period: 'AM', name: 'Serra de Tramuntana', detail: 'Carretera de montaña por la sierra. Los pueblos de Valldemossa y Deià son imperdibles.', type: 'nature' },
+          { time: '11:30', period: 'AM', name: 'Cala Deiá', detail: 'Cala escondida debajo del pueblo de Deià. Aguas cristalinas y rocas.', type: 'nature' },
+          { time: '14:00', period: 'PM', name: "Ca's Patro March", detail: 'El restaurante más fotogénico de la isla. Arroces y langosta frente al mar. Reserva obligatoria.', type: 'food' },
+          { time: '17:00', period: 'PM', name: 'Cala Formentor', detail: 'La cala más espectacular de Mallorca. Al norte de la isla, rodeada de pinos y acantilados.', type: 'nature' },
+          { time: '20:30', period: 'PM', name: 'Port de Pollença', detail: 'Pueblo marinero tranquilo para cenar mirando los botes. Más local y menos turístico que el sur.', type: 'food' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'lisboa', name: 'Lisboa', country: 'Portugal', flag: '🇵🇹',
+    desc: 'La ciudad de las siete colinas, el fado y los pastéis de Belém. Bohemia, melancólica y completamente irresistible.',
+    bestTime: 'Mar–Jun, Sep–Oct', avgTemp: '18°C', currency: 'Euro',
+    days: [
+      {
+        label: 'Día 1', theme: 'Alfama, el fado y Belém',
+        tip: 'Los pastéis de Belém son famosos mundialmente, pero la cola vale la pena. Pídelos calientes con canela y azúcar glass.',
+        stops: [
+          { time: '9:00', period: 'AM', name: 'Time Out Market', detail: 'El mercado gastronómico más famoso del mundo. Desayuno entre los mejores chefs de Lisboa.', type: 'food' },
+          { time: '10:30', period: 'AM', name: 'Alfama (barrio)', detail: 'El barrio más antiguo de Lisboa. Callejuelas empinadas, ropa tendida y vistas increíbles al Tejo.', type: 'culture' },
+          { time: '12:00', period: 'PM', name: 'Miradouro das Portas do Sol', detail: 'El mirador más fotogénico de Alfama. Vista al río Tejo y a los tejados naranja de Lisboa.', type: 'nature' },
+          { time: '13:30', period: 'PM', name: 'A Baiuca', detail: 'Tasca familiar en Alfama con bacalhau auténtico y vino verde. Los lugareños van aquí.', type: 'food' },
+          { time: '15:30', period: 'PM', name: 'Mosteiro dos Jerónimos', detail: 'Arquitectura manuelina en su máxima expresión. El monasterio donde reposa Vasco da Gama.', type: 'culture' },
+          { time: '17:00', period: 'PM', name: 'Pastéis de Belém', detail: 'La pastelería original desde 1837. Los pastéis de nata más famosos del mundo. Sin discusión.', type: 'food' },
+          { time: '22:00', period: 'PM', name: 'Casa de Fado (Alfama)', detail: 'El fado auténtico, sin show turístico. Sr. Fado o A Tasca do Chico para una experiencia real.', type: 'nightlife' }
+        ]
+      },
+      {
+        label: 'Día 2', theme: 'Bairro Alto, LX Factory y el Tejo',
+        tip: 'El LX Factory los domingos tiene el mejor mercadillo vintage de la ciudad. Llega antes del mediodía.',
+        stops: [
+          { time: '10:00', period: 'AM', name: 'Tram 28', detail: 'El tranvía histórico que sube por Alfama y Graça. Más que transporte — es una atracción en sí mismo.', type: 'culture' },
+          { time: '11:30', period: 'AM', name: 'LX Factory', detail: 'Fábrica reconvertida en espacio cultural. Tiendas indie, restaurantes cool y el mercado del domingo.', type: 'shopping' },
+          { time: '13:30', period: 'PM', name: 'Time Out Market (almuerzo)', detail: 'Segunda visita para el almuerzo — cada puesto es un chef distinto. El atún y los mariscos son excepcionales.', type: 'food' },
+          { time: '15:30', period: 'PM', name: 'Bairro Alto', detail: 'El barrio bohemio de Lisboa. De día, galerías y tiendas vintage. De noche, el corazón de la fiesta.', type: 'shopping' },
+          { time: '18:00', period: 'PM', name: 'Miradouro de Santa Catarina', detail: 'El mirador de los hippies y artistas locales. Capoeira, músicos y atardeceres sobre el Tejo.', type: 'nature' },
+          { time: '23:00', period: 'PM', name: 'Bairro Alto (bares)', detail: 'Las calles se llenan de gente con copas. Bar do Gilão o Bicaense para empezar antes de los clubs.', type: 'nightlife' }
+        ]
+      }
+    ]
+  }
+];
+
+// Coming soon cities placeholder
+const comingSoon = [
+  { id: 'porto', name: 'Porto', country: 'Portugal', flag: '🇵🇹' },
+  { id: 'ibiza', name: 'Ibiza', country: 'España', flag: '🇪🇸' }
+];
+
+let selectedCity = cities[0];
+let selectedDay = 0;
+let activeFilters = ['all'];
+
+function renderCities() {
+  const grid = document.getElementById('cityGrid');
+  grid.innerHTML = '';
+  cities.forEach(city => {
+    const btn = document.createElement('div');
+    btn.className = 'city-btn' + (city.id === selectedCity.id ? ' active' : '');
+    btn.innerHTML = `<span class="flag">${city.flag}</span><div class="city-info"><span class="city-name">${city.name}</span><span class="country">${city.country}</span></div>`;
+    btn.onclick = () => { selectedCity = city; selectedDay = 0; renderAll(); };
+    grid.appendChild(btn);
+  });
+  comingSoon.forEach(city => {
+    const btn = document.createElement('div');
+    btn.className = 'city-btn';
+    btn.style.opacity = '0.5';
+    btn.style.cursor = 'default';
+    btn.innerHTML = `<span class="flag">${city.flag}</span><div class="city-info"><span class="city-name">${city.name}</span><span class="coming-soon">Próximo</span></div>`;
+    grid.appendChild(btn);
+  });
+}
+
+function renderDayTabs() {
+  const tabs = document.getElementById('dayTabs');
+  tabs.innerHTML = '';
+  selectedCity.days.forEach((d, i) => {
+    const tab = document.createElement('div');
+    tab.className = 'day-tab' + (i === selectedDay ? ' active' : '');
+    tab.textContent = d.label;
+    tab.onclick = () => { selectedDay = i; renderItinerary(); renderCities(); renderDayTabs(); };
+    tabs.appendChild(tab);
+  });
+}
+
+function renderFilters() {
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.onclick = () => {
+      const f = chip.dataset.filter;
+      if (f === 'all') {
+        activeFilters = ['all'];
+      } else {
+        activeFilters = activeFilters.filter(x => x !== 'all');
+        if (activeFilters.includes(f)) {
+          activeFilters = activeFilters.filter(x => x !== f);
+          if (activeFilters.length === 0) activeFilters = ['all'];
+        } else {
+          activeFilters.push(f);
+        }
+      }
+      document.querySelectorAll('.chip').forEach(c => {
+        c.classList.toggle('active',
+          activeFilters.includes(c.dataset.filter) ||
+          (activeFilters[0] === 'all' && c.dataset.filter === 'all')
+        );
+      });
+      renderItinerary();
+    };
+  });
+}
+
+function renderItinerary() {
+  const day = selectedCity.days[selectedDay];
+  const header = document.getElementById('cityHeader');
+  header.innerHTML = `
+    <div class="city-header-row">
+      <h2>${selectedCity.flag} ${selectedCity.name}</h2>
+      <span class="city-country-badge">${selectedCity.country}</span>
+    </div>
+    <p class="city-desc">${selectedCity.desc}</p>
+    <div class="city-meta">
+      <span class="meta-item"><span class="meta-icon">📅</span> Mejor época: ${selectedCity.bestTime}</span>
+      <span class="meta-item"><span class="meta-icon">🌡</span> ${selectedCity.avgTemp} verano</span>
+      <span class="meta-item"><span class="meta-icon">💶</span> ${selectedCity.currency}</span>
+    </div>
+  `;
+
+  const area = document.getElementById('stopsArea');
+  const showAll = activeFilters.includes('all');
+  const visibleStops = day.stops.filter(s => showAll || activeFilters.includes(s.type));
+  const tagLabels = { food: 'Gastronomía', culture: 'Cultura', nature: 'Naturaleza', nightlife: 'Nocturna', shopping: 'Shopping' };
+
+  area.innerHTML = `<div class="day-heading">${day.theme}</div>`;
+
+  if (visibleStops.length === 0) {
+    area.innerHTML += `<div class="empty-state"><div class="icon">🗺️</div><p>No hay paradas con ese filtro para este día</p></div>`;
+  } else {
+    visibleStops.forEach(stop => {
+      area.innerHTML += `
+        <div class="stop-card">
+          <div class="stop-inner">
+            <div class="stop-time">
+              <span class="stop-time-main">${stop.time}</span>
+              <span class="stop-time-period">${stop.period}</span>
+            </div>
+            <div class="dot-col"><div class="dot ${stop.type}"></div></div>
+            <div class="stop-body">
+              <div class="stop-name">${stop.name}</div>
+              <div class="stop-detail">${stop.detail}</div>
+            </div>
+            <span class="stop-badge ${stop.type}">${tagLabels[stop.type]}</span>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  const tipBox = document.getElementById('tipBox');
+  document.getElementById('tipText').textContent = day.tip;
+  tipBox.style.display = 'block';
+}
+
+function renderAll() {
+  renderCities();
+  renderDayTabs();
+  renderItinerary();
+}
+
+renderAll();
+renderFilters();
+</script>
+</body>
+</html>
