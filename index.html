@@ -3,631 +3,540 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guía de Viaje · Europa</title>
+<title>EUROTRIP · Guía de Viaje</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --navy: #1a2744;
-    --navy-light: #2a3d6e;
-    --gold: #c8a97e;
-    --gold-dark: #a0824f;
-    --terracotta: #b45c36;
-    --cream: #f7f4ef;
-    --cream-dark: #ede9e2;
-    --white: #ffffff;
-    --text-main: #1e1e1e;
-    --text-muted: #777;
-    --text-light: #aaa;
-    --border: #e0ddd6;
-    --green: #4a7c59;
-    --purple: #7b4fa6;
-    --sidebar-w: 300px;
+    --navy: #1a2744; --gold: #c8a97e; --gold-dark: #a0824f;
+    --terracotta: #b45c36; --cream: #f7f4ef; --cream-dark: #ede9e2;
+    --white: #ffffff; --text-main: #1e1e1e; --text-muted: #666;
+    --text-light: #999; --border: #e0ddd6; --green: #3d7a52;
+    --purple: #6b3fa0; --blue: #2563a8;
   }
-
   html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text-main); min-height: 100vh; }
-
-  /* HERO */
-  .hero {
-    background: var(--navy);
-    padding: 3rem 2rem 2.5rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(circle at 20% 50%, rgba(200,169,126,0.08) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 20%, rgba(200,169,126,0.06) 0%, transparent 40%);
-  }
-  .hero-inner { position: relative; max-width: 600px; margin: 0 auto; }
-  .hero-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-    font-weight: 500;
-  }
-  .hero h1 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 400;
-    color: #fff;
-    line-height: 1.15;
-    margin-bottom: 0.75rem;
-  }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text-main); }
+  .hero { background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 60%, rgba(200,169,126,0.1) 0%, transparent 55%), radial-gradient(ellipse at 75% 20%, rgba(200,169,126,0.07) 0%, transparent 45%); }
+  .hero-inner { position: relative; max-width: 640px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; font-weight: 500; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 400; color: #fff; line-height: 1.12; margin-bottom: 0.875rem; }
   .hero h1 em { font-style: italic; color: var(--gold); }
-  .hero-sub { font-size: 14px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .hero-sub { font-size: 15px; color: rgba(255,255,255,0.5); font-weight: 300; margin-bottom: 2rem; }
+  .city-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .city-pill { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: rgba(255,255,255,0.75); cursor: pointer; transition: all 0.18s; user-select: none; font-family: 'Inter', sans-serif; }
+  .city-pill:hover { background: rgba(200,169,126,0.2); border-color: var(--gold); color: #fff; }
+  .city-pill.active { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 500; }
+  .cat-nav { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; padding: 0 2rem; display: flex; align-items: center; gap: 0; overflow-x: auto; scrollbar-width: none; }
+  .cat-nav::-webkit-scrollbar { display: none; }
+  .cat-btn { padding: 1rem 1.1rem; border: none; border-bottom: 2px solid transparent; background: transparent; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: var(--text-muted); white-space: nowrap; transition: all 0.15s; display: flex; align-items: center; gap: 6px; }
+  .cat-btn:hover { color: var(--text-main); }
+  .cat-btn.active { color: var(--navy); border-bottom-color: var(--gold); }
+  .cat-icon { font-size: 15px; }
+  .main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+  .city-intro { display: flex; align-items: flex-start; gap: 2rem; background: var(--white); border-radius: 16px; border: 1px solid var(--border); padding: 1.75rem 2rem; margin-bottom: 2.5rem; }
+  .city-flag { font-size: 3rem; line-height: 1; flex-shrink: 0; }
+  .city-intro h2 { font-family: 'Playfair Display', serif; font-size: 1.75rem; font-weight: 400; color: var(--navy); margin-bottom: 0.375rem; }
+  .city-intro p { font-size: 14px; color: var(--text-muted); line-height: 1.65; max-width: 580px; }
+  .city-meta-row { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 0.875rem; }
+  .meta-chip { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-muted); background: var(--cream); border: 1px solid var(--border); padding: 4px 10px; border-radius: 12px; }
+  .section-header { margin-bottom: 1.25rem; }
+  .section-header h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--navy); margin-bottom: 0.25rem; }
+  .section-header p { font-size: 13px; color: var(--text-muted); }
 
-  /* LAYOUT */
-  .layout { display: flex; min-height: calc(100vh - 160px); }
+  /* PRICE FILTER */
+  .price-filter { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; align-items: center; }
+  .price-filter-label { font-size: 12px; color: var(--text-light); font-weight: 500; margin-right: 4px; }
+  .price-chip { border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 12px; background: var(--white); cursor: pointer; transition: all 0.15s; color: var(--text-muted); user-select: none; font-family: 'Inter', sans-serif; font-weight: 500; }
+  .price-chip:hover { border-color: var(--gold); color: var(--text-main); }
+  .price-chip.active.all { background: var(--navy); border-color: var(--navy); color: #fff; }
+  .price-chip.active.cheap { background: #2e7d32; border-color: #2e7d32; color: #fff; }
+  .price-chip.active.mid { background: #e65100; border-color: #e65100; color: #fff; }
+  .price-chip.active.high { background: #6a1b9a; border-color: #6a1b9a; color: #fff; }
 
-  /* SIDEBAR */
-  .sidebar {
-    width: var(--sidebar-w);
-    min-width: var(--sidebar-w);
-    background: var(--white);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow-y: auto;
-  }
-
-  .sidebar-section { padding: 1.25rem; border-bottom: 1px solid var(--border); }
-  .sidebar-label {
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-light);
-    font-weight: 600;
-    margin-bottom: 0.875rem;
-  }
-
-  /* CITY GRID */
-  .city-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
-  .city-btn {
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.625rem 0.5rem;
-    background: var(--white);
-    cursor: pointer;
-    text-align: left;
-    transition: all 0.18s ease;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    user-select: none;
-  }
-  .city-btn:hover { background: var(--cream); border-color: var(--gold); transform: translateY(-1px); }
-  .city-btn.active { background: var(--navy); border-color: var(--navy); }
-  .city-btn .flag { font-size: 17px; line-height: 1; }
-  .city-btn .city-info .city-name { font-size: 12.5px; font-weight: 500; color: var(--text-main); display: block; }
-  .city-btn.active .city-name { color: #fff; }
-  .city-btn .city-info .country { font-size: 10px; color: var(--text-light); display: block; }
-  .city-btn.active .country { color: rgba(255,255,255,0.5); }
-
-  /* FILTER CHIPS */
-  .filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .chip {
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 5px 11px;
-    font-size: 11.5px;
-    background: var(--white);
-    cursor: pointer;
-    transition: all 0.15s;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    user-select: none;
-    font-family: 'Inter', sans-serif;
-  }
-  .chip:hover { border-color: var(--gold); color: var(--text-main); }
-  .chip.active { background: var(--gold); border-color: var(--gold); color: #fff; }
-  .chip svg { width: 13px; height: 13px; }
-
-  /* DAY TABS */
-  .day-tabs-row { display: flex; gap: 6px; flex-wrap: wrap; }
-  .day-tab {
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    padding: 5px 13px;
-    font-size: 12px;
-    background: var(--white);
-    cursor: pointer;
-    color: var(--text-muted);
-    transition: all 0.15s;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-  }
-  .day-tab:hover { border-color: var(--terracotta); color: var(--text-main); }
-  .day-tab.active { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
-
-  /* MAIN PANEL */
-  .main-panel { flex: 1; overflow-y: auto; }
-
-  .city-header {
-    padding: 1.75rem 2.5rem 1.5rem;
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 20;
-  }
-  .city-header-row { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
-  .city-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.9rem;
-    font-weight: 400;
-    color: var(--navy);
-  }
-  .city-country-badge {
-    font-size: 12px;
-    color: var(--text-light);
-    background: var(--cream);
-    padding: 3px 10px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-  }
-  .city-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; max-width: 560px; }
-  .city-meta { display: flex; gap: 1.25rem; margin-top: 0.875rem; }
-  .meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-muted); }
-  .meta-icon { color: var(--gold); font-size: 14px; }
-
-  /* STOPS */
-  .stops-area { padding: 1.75rem 2.5rem; }
-  .day-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--navy);
-    margin-bottom: 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  .day-heading::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-  .stop-card {
-    background: var(--white);
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    margin-bottom: 10px;
-    transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
-    overflow: hidden;
-  }
-  .stop-card:hover {
-    border-color: var(--gold);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-  }
-
-  .stop-inner { display: flex; align-items: flex-start; padding: 1rem 1.25rem; gap: 1rem; }
-
-  .stop-time { min-width: 50px; text-align: right; padding-top: 2px; }
-  .stop-time-main { font-size: 13px; font-weight: 600; color: var(--navy); display: block; }
-  .stop-time-period { font-size: 10px; color: var(--text-light); display: block; }
-
-  .dot-col { display: flex; flex-direction: column; align-items: center; padding-top: 4px; }
-  .dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .dot.food { background: var(--gold); }
-  .dot.culture { background: var(--navy); }
-  .dot.nature { background: var(--green); }
-  .dot.nightlife { background: var(--purple); }
-  .dot.shopping { background: var(--terracotta); }
-
-  .stop-body { flex: 1; min-width: 0; }
-  .stop-name { font-size: 14px; font-weight: 500; color: var(--text-main); margin-bottom: 3px; }
-  .stop-detail { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
-
-  .stop-badge {
-    font-size: 10px;
-    padding: 3px 9px;
-    border-radius: 10px;
-    font-weight: 500;
-    white-space: nowrap;
-    align-self: flex-start;
-    margin-top: 2px;
-    flex-shrink: 0;
-  }
-  .stop-badge.food { background: #fdf3e7; color: #8a5f1e; border: 1px solid #e8d4a0; }
-  .stop-badge.culture { background: #eef0f6; color: #1a2744; border: 1px solid #c0c8de; }
-  .stop-badge.nature { background: #edf5f0; color: #2e6040; border: 1px solid #a8d4b8; }
-  .stop-badge.nightlife { background: #f4eefb; color: #5a2e8a; border: 1px solid #c8aae8; }
-  .stop-badge.shopping { background: #faeee9; color: #7a3018; border: 1px solid #e0b09a; }
-
-  .tip-box {
-    margin: 0 2.5rem 2rem;
-    background: #fff8ee;
-    border-left: 3px solid var(--gold);
-    border-radius: 0 10px 10px 0;
-    padding: 0.875rem 1.125rem;
-  }
-  .tip-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; margin-bottom: 4px; }
-  .tip-box p { font-size: 12.5px; color: #7a5a2e; line-height: 1.55; }
-
-  .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-light); }
-  .empty-state .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
-  .empty-state p { font-size: 14px; }
-
-  /* COMING SOON BADGE */
-  .coming-soon {
-    font-size: 9px;
-    background: var(--cream-dark);
-    color: var(--text-light);
-    padding: 2px 6px;
-    border-radius: 6px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-top: 2px;
-    display: inline-block;
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    .layout { flex-direction: column; }
-    .sidebar { width: 100%; min-width: 100%; height: auto; position: relative; }
-    .city-header { position: relative; }
-  }
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .card { background: var(--white); border-radius: 14px; border: 1px solid var(--border); overflow: hidden; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.07); border-color: var(--gold); }
+  .card.hidden { display: none; }
+  .card-body { padding: 1.25rem; }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .card-name { font-size: 15px; font-weight: 600; color: var(--text-main); line-height: 1.3; }
+  .card-badges { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; flex-shrink: 0; }
+  .card-badge { font-size: 10px; font-weight: 500; padding: 3px 9px; border-radius: 10px; white-space: nowrap; }
+  .badge-beach { background: #e8f4fd; color: #1a5f8a; border: 1px solid #b8d9f0; }
+  .badge-food { background: #fdf3e7; color: #8a5f1e; border: 1px solid #e8d4a0; }
+  .badge-activity { background: #edf5f0; color: #2e6040; border: 1px solid #a8d4b8; }
+  .badge-museum { background: #eef0f6; color: #1a2744; border: 1px solid #c0c8de; }
+  .badge-shopping { background: #faeee9; color: #7a3018; border: 1px solid #e0b09a; }
+  .badge-disco { background: #f3e8fc; color: #5a1a8a; border: 1px solid #d4a8f0; }
+  .badge-mirador { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+  .badge-price-cheap { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+  .badge-price-mid { background: #fff3e0; color: #bf360c; border: 1px solid #ffcc80; }
+  .badge-price-high { background: #f3e5f5; color: #4a148c; border: 1px solid #ce93d8; }
+  .card-location { font-size: 12px; color: var(--text-light); display: flex; align-items: center; gap: 4px; margin-bottom: 0.625rem; }
+  .card-location::before { content: '📍'; font-size: 11px; }
+  .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .card-footer { padding: 0.75rem 1.25rem; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 11px; padding: 3px 9px; border-radius: 8px; background: var(--cream); color: var(--text-muted); border: 1px solid var(--border); }
+  .tip-callout { background: #fff8ee; border-left: 3px solid var(--gold); border-radius: 0 10px 10px 0; padding: 0.875rem 1.125rem; margin-bottom: 1.5rem; }
+  .tip-callout p { font-size: 13px; color: #7a5a2e; line-height: 1.55; }
+  .tip-callout strong { font-weight: 600; }
+  @media (max-width: 640px) { .city-intro { flex-direction: column; gap: 1rem; } .cards-grid { grid-template-columns: 1fr; } .cat-nav { padding: 0 0.5rem; } .main { padding: 1.5rem 1rem 3rem; } }
 </style>
 </head>
 <body>
-
 <div class="hero">
   <div class="hero-inner">
-    <p class="hero-eyebrow">guía de viaje · europa</p>
-    <h1>Descubre <em>Europa</em><br>a tu ritmo</h1>
-    <p class="hero-sub">Itinerarios curados por ciudad, restaurantes, cultura y más</p>
+    <p class="hero-eyebrow">guía de viaje · europa 2026</p>
+    <h1>Tu <em>EUROTRIP</em><br>todo en un lugar</h1>
+    <p class="hero-sub">Playas, restaurantes, actividades, museos y más — para consultar cuando quieras</p>
+    <div class="city-pills" id="cityPills"></div>
   </div>
 </div>
-
-<div class="layout">
-  <aside class="sidebar">
-    <div class="sidebar-section">
-      <p class="sidebar-label">Destinos</p>
-      <div class="city-grid" id="cityGrid"></div>
-    </div>
-
-    <div class="sidebar-section">
-      <p class="sidebar-label">Filtrar por categoría</p>
-      <div class="filter-chips" id="filterChips">
-        <div class="chip active" data-filter="all">🌍 Todo</div>
-        <div class="chip" data-filter="food">🍽 Gastronomía</div>
-        <div class="chip" data-filter="culture">🏛 Cultura</div>
-        <div class="chip" data-filter="nature">🏔 Naturaleza</div>
-        <div class="chip" data-filter="nightlife">🌙 Vida nocturna</div>
-        <div class="chip" data-filter="shopping">🛍 Shopping</div>
-      </div>
-    </div>
-
-    <div class="sidebar-section">
-      <p class="sidebar-label">Día del itinerario</p>
-      <div class="day-tabs-row" id="dayTabs"></div>
-    </div>
-  </aside>
-
-  <main class="main-panel">
-    <div class="city-header" id="cityHeader"></div>
-    <div class="stops-area" id="stopsArea"></div>
-    <div class="tip-box" id="tipBox" style="display:none">
-      <p class="tip-label">💡 Tip local</p>
-      <p id="tipText"></p>
-    </div>
-  </main>
+<nav class="cat-nav" id="catNav">
+  <button class="cat-btn active" data-cat="playas"><span class="cat-icon">🏖</span> Playas</button>
+  <button class="cat-btn" data-cat="restaurantes"><span class="cat-icon">🍽</span> Restaurantes</button>
+  <button class="cat-btn" data-cat="actividades"><span class="cat-icon">🎯</span> Actividades</button>
+  <button class="cat-btn" data-cat="museos"><span class="cat-icon">🏛</span> Museos</button>
+  <button class="cat-btn" data-cat="comercio"><span class="cat-icon">🛍</span> Comercio</button>
+  <button class="cat-btn" data-cat="discotheques"><span class="cat-icon">🎧</span> Discotecas</button>
+  <button class="cat-btn" data-cat="miradores"><span class="cat-icon">🌅</span> Miradores</button>
+</nav>
+<div class="main">
+  <div id="cityIntro" class="city-intro"></div>
+  <div id="sections"></div>
 </div>
-
 <script>
-const cities = [
-  {
-    id: 'barcelona', name: 'Barcelona', country: 'España', flag: '🇪🇸',
-    desc: 'La ciudad de Gaudí, la playa y las tapas. Un mix perfecto de arquitectura, cultura y vida mediterránea.',
-    bestTime: 'May–Sep', avgTemp: '22°C', currency: 'Euro',
-    days: [
-      {
-        label: 'Día 1', theme: 'Gaudí y el casco antiguo',
-        tip: 'Reserva la Sagrada Família con anticipación — las entradas se agotan semanas antes. La mejor hora es el amanecer para la luz natural.',
-        stops: [
-          { time: '8:30', period: 'AM', name: 'Federal Café', detail: 'Desayuno australiano en el Raval. Prueba el smashed avo y el flat white.', type: 'food' },
-          { time: '10:00', period: 'AM', name: 'Sagrada Família', detail: 'La obra maestra inacabada de Gaudí. Reserva entradas con torres — vale la pena la vista desde arriba.', type: 'culture' },
-          { time: '13:00', period: 'PM', name: 'Bar del Pla', detail: 'Tapas clásicas catalanas en el Born. Pide las croquetas de jamón y el pan con tomate.', type: 'food' },
-          { time: '15:00', period: 'PM', name: 'Barrio Gótico', detail: 'Callejuelas medievales, la Catedral de Barcelona y la Plaza Real. Perfecto para perderse.', type: 'culture' },
-          { time: '17:30', period: 'PM', name: 'Park Güell', detail: 'Mosaicos de colores y vistas panorámicas de la ciudad. El área monumental requiere ticket.', type: 'nature' },
-          { time: '21:00', period: 'PM', name: 'El Xampanyet', detail: 'Bar clásico del Born para cava y pintxos. Ambiente auténtico barcelonés.', type: 'nightlife' }
-        ]
-      },
-      {
-        label: 'Día 2', theme: 'Playa, Paseo de Gracia y Eixample',
-        tip: 'El Paseo de Gracia tiene el mejor helado de la ciudad en Rocambolesc (de los hermanos Roca). No te lo pierdas.',
-        stops: [
-          { time: '9:00', period: 'AM', name: 'Barceloneta', detail: 'Paseo matutino por la playa y el Puerto Olímpico. Tranquilo antes del mediodía.', type: 'nature' },
-          { time: '11:00', period: 'AM', name: 'La Boqueria', detail: 'Mercado icónico de Las Ramblas. Para desayunar zumos frescos o comprar jamón y quesos.', type: 'food' },
-          { time: '13:30', period: 'PM', name: 'Cervecería Catalana', detail: 'El mejor brunch-almuerzo del Eixample. Reserva con anticipación o llega antes de abrir.', type: 'food' },
-          { time: '15:30', period: 'PM', name: 'Casa Batlló / La Pedrera', detail: 'Dos edificios Gaudí en el mismo paseo. Elige uno para entrar — La Pedrera tiene mejor rooftop.', type: 'culture' },
-          { time: '18:00', period: 'PM', name: 'Paseo de Gracia', detail: 'El boulevard de lujo de Barcelona. Zara, Mango, Massimo Dutti y marcas internacionales.', type: 'shopping' },
-          { time: '22:00', period: 'PM', name: 'Opium / CDLC', detail: 'Clubs frente al mar del Puerto Olímpico. Ambiente internacional y buena música house.', type: 'nightlife' }
-        ]
-      },
-      {
-        label: 'Día 3', theme: 'Montserrat y mercadillos',
-        tip: 'Si vas a Montserrat, sal temprano. El tren de FGC sale de Plza. España. Lleva snacks — los restaurantes allí son caros.',
-        stops: [
-          { time: '8:00', period: 'AM', name: 'Montserrat (excursión)', detail: 'Montaña sagrada a 1h de Barcelona. Monasterio benedictino, senderismo y vistas impresionantes.', type: 'nature' },
-          { time: '14:00', period: 'PM', name: 'El Nacional', detail: 'Cuatro restaurantes y cuatro bares bajo un mismo techo. La versión gourmet del mercado gastronómico.', type: 'food' },
-          { time: '16:30', period: 'PM', name: 'El Raval / MACBA', detail: 'Barrio bohemio con arte callejero, el MACBA y tiendas vintage.', type: 'culture' },
-          { time: '19:00', period: 'PM', name: 'Mercado del Born', detail: 'Market de diseño independiente y ropa vintage en el Born.', type: 'shopping' },
-          { time: '21:30', period: 'PM', name: 'Tickets (Albert Adrià)', detail: 'Bar de tapas de vanguardia del hermano de Ferran Adrià. Reserva con 2 meses de anticipación.', type: 'food' }
-        ]
-      }
-    ]
+const data = {
+  barcelona: {
+    name:'Barcelona',flag:'🇪🇸',country:'España',
+    desc:'La capital catalana combina playa, arquitectura modernista y una escena gastronómica de primer nivel. Es una ciudad para caminar, perderse en sus barrios y comer bien a cualquier hora.',
+    bestTime:'May–Sep',temp:'22°C verano',moneda:'Euro',idioma:'Español / Catalán',
+    playas:{tip:'Las playas de Barcelona están dentro de la ciudad, muy accesibles en metro (línea 4). Llega antes de las 10h en verano para conseguir buen sitio.',items:[
+      {name:'Barceloneta',location:'Barceloneta, 15 min a pie del centro',badge:'badge-beach',desc:'La playa más icónica y céntrica de Barcelona. Arena fina, aguas tranquilas y un paseo marítimo lleno de vida. Perfecta para el primer día — rodeada de bares y chiringuitos. En verano se llena mucho, pero el ambiente es inigualable.',tags:['Céntrica','Chiringuitos','Animada']},
+      {name:'Playa de la Mar Bella',location:'Poblenou, 20 min en metro',badge:'badge-beach',desc:'Más tranquila que Barceloneta y con mejor onda local. Tiene una zona nudista al norte y una piscina de agua salada. El barrio de Poblenou alrededor es perfecto para tomar algo después.',tags:['Menos turística','Piscina salada','Local']},
+      {name:'Playa de Bogatell',location:'Poblenou, 25 min en metro',badge:'badge-beach',desc:'Una de las playas más limpias y amplias de la ciudad. Menos masificada que Barceloneta, con buenas instalaciones deportivas — canchas de vóley y zona de ejercicios.',tags:['Limpia','Deportiva','Amplia']},
+      {name:'Playa de Nova Icaria',location:'Vila Olímpica, 20 min en metro',badge:'badge-beach',desc:'Justo detrás del Puerto Olímpico, tranquila y bien equipada. Los chiringuitos tienen buena relación calidad-precio y los rascacielos olímpicos de fondo son un telón único.',tags:['Tranquila','Puerto Olímpico','Equipada']},
+      {name:'Playa de Sitges',location:'Sitges, 40 min en tren desde Passeig de Gràcia',badge:'badge-beach',desc:'El escape favorito de los barceloneses. El pueblo de Sitges es encantador, con calles medievales, bares y vida nocturna animada. Las playas son más bonitas que las de la ciudad, con aguas más limpias.',tags:['Excursión','Pueblo pintoresco','Aguas limpias']},
+      {name:'Playa de Castelldefels',location:'Castelldefels, 30 min en tren R2',badge:'badge-beach',desc:'Playa larga y amplia a 30 minutos de Barcelona en tren. Mucho más espacio que Barceloneta, con zonas de windsurf y chiringuitos con arroz y paella frente al mar.',tags:['30 min en tren','Amplia','Paellas']},
+      {name:'Cala Llevadó (Costa Brava)',location:'Tossa de Mar, 1h30 en bus',badge:'badge-beach',desc:'Si tienes un día libre, la Costa Brava es otra dimensión. Calas de agua turquesa entre pinos y rocas. Tossa de Mar tiene un castillo medieval sobre el mar.',tags:['Excursión día','Aguas turquesas','Castillo medieval']}
+    ]},
+    restaurantes:{tip:'En Barcelona se come tarde: almuerzo entre 14h–16h, cena después de las 21h. Reserva siempre que puedas. El menú del día (12–16€) es la mejor relación precio-calidad.',items:[
+      {name:'Bar del Pla',location:'El Born, Carrer de la Montcada 2',badge:'badge-food',price:'mid',desc:'Tapas catalanas de calidad en el corazón del Born. Croquetas de jamón, pan con tomate y huevos rotos imprescindibles. Ambiente animado y precios razonables.',tags:['Tapas','Catalán','Reserva recomendada']},
+      {name:'Cervecería Catalana',location:'Eixample, Carrer de Mallorca 236',badge:'badge-food',price:'mid',desc:'El brunch-almuerzo más popular del Eixample. Famosa por sus montaditos, patatas bravas y una selección enorme de tapas. Llega antes de abrir o reserva con días de anticipación.',tags:['Tapas','Brunch','Siempre lleno']},
+      {name:'Bodega Sepúlveda',location:'Eixample esquerra, Carrer de Sepúlveda 173',badge:'badge-food',price:'cheap',desc:'Bodega catalana de barrio con mesas de madera, vinos a granel y cocina casera contundente. Los fideos a la cazuela y el conejo con romesco son extraordinarios. Ambiente completamente local.',tags:['Bodega','Local','Sin turistas']},
+      {name:'Bar Marsella',location:'El Raval, Carrer de Sant Pau 65',badge:'badge-food',price:'cheap',desc:'El bar más antiguo de Barcelona (1820). Las botellas de absenta llevan décadas en los estantes, hay polvo en los espejos y el ambiente es de otra época. La absenta es la bebida. Una visita cultural obligatoria.',tags:['Bar histórico','Absenta','Desde 1820']},
+      {name:'El Nacional',location:'Passeig de Gràcia 24, Eixample',badge:'badge-food',price:'mid',desc:'Cuatro restaurantes y cuatro bares bajo el techo de una antigua fábrica. Pintxos vascos, mariscos gallegos, cocina catalana y coctelería, todo en el mismo espacio. Espectacular en diseño y ambiente.',tags:['Gastronómico','Variado','Espectacular']},
+      {name:'Parking Pizza',location:'Eixample esquerra, Carrer de Londres 98',badge:'badge-food',price:'mid',desc:'La mejor pizza de Barcelona según los italianos que viven en la ciudad. Masa fermentada 72 horas, ingredientes importados de Italia y horno de leña perfecto. Sin reserva, solo lista de espera.',tags:['Pizza','Italiana auténtica','Sin reserva']},
+      {name:'Xiringuito Escribà',location:'Playa de Bogatell, Ronda del Litoral 42',badge:'badge-food',price:'high',desc:'El mejor chiringuito de playa de Barcelona, de la familia Escribà. Sus arroces con bogavante y la paella de marisco son excepcionales. Mesas frente al mar. Reserva obligatoria en verano.',tags:['Chiringuito','Arroces','Frente al mar']},
+      {name:'Tickets (Albert Adrià)',location:'Eixample, Av. del Paral·lel 164',badge:'badge-food',price:'high',desc:'Bar de tapas de vanguardia del hermano de Ferran Adrià. Las aceitunas esféricas y el aire de tomate son icónicas. Reserva con 2 meses de anticipación — es casi imposible conseguir mesa de otro modo.',tags:['Alta cocina','Vanguardia','Reserva 2 meses antes']}
+    ]},
+    actividades:{tip:'La Sagrada Família y el Park Güell requieren reserva online con días de anticipación. El transporte público es excelente.',items:[
+      {name:'Sagrada Família',location:'Eixample, Carrer de Mallorca 401',badge:'badge-activity',desc:'La obra maestra inacabada de Gaudí. Por dentro la luz que entra por los vitrales de colores es algo difícil de olvidar. Añade la visita a las torres para la mejor vista de la ciudad.',tags:['Arquitectura','Gaudí','Reserva online','€€']},
+      {name:'Park Güell',location:'Gràcia, Carrer d\'Olot s/n',badge:'badge-activity',desc:'El parque de mosaicos de Gaudí en la colina de El Carmel. La zona monumental requiere ticket. El resto del parque es gratuito. Llega temprano para ver la ciudad antes de que se llene.',tags:['Gaudí','Vistas panorámicas','Mosaicos','€']},
+      {name:'Barrio Gótico',location:'Ciutat Vella, centro histórico',badge:'badge-activity',desc:'El corazón medieval de Barcelona. La Catedral, la Plaza de Sant Jaume y los restos del templo romano de Augusto son los puntos clave. Perfecto para caminar sin rumbo y descubrir plazas escondidas.',tags:['Gratis','Historia','Caminata','Medieval']},
+      {name:'La Pedrera (Casa Milà)',location:'Eixample, Passeig de Gràcia 92',badge:'badge-activity',desc:'El edificio modernista de Gaudí con el rooftop más fotogénico de la ciudad. Las chimeneas con forma de guerreros medievales son icónicas. Incluye exposición interior y piso de época restaurado.',tags:['Gaudí','Rooftop','Modernismo','€€']},
+      {name:'Montserrat (excursión)',location:'1 hora desde Plaça Espanya (tren FGC)',badge:'badge-activity',desc:'La montaña sagrada de Cataluña, con un monasterio benedictino del siglo IX enclavado entre rocas impresionantes. Rutas de senderismo, funicular y vistas espectaculares. Sal antes de las 9h.',tags:['Excursión','Naturaleza','Monasterio','Senderismo']},
+      {name:'Barrio del Born',location:'Ciutat Vella, alrededor del Passeig del Born',badge:'badge-activity',desc:'El barrio más cool de Barcelona. El Palau de la Música Catalana (UNESCO), el Mercat del Born con ruinas medievales y las mejores tiendas y bares de la ciudad en pocas manzanas.',tags:['Barrio','Palau de la Música','Ruinas medievales']},
+      {name:'Cable car al Tibidabo',location:'Tibidabo, cima de la colina',badge:'badge-activity',desc:'El parque de atracciones más antiguo de España (1901) con vistas de 360° de Barcelona y el mar. La subida en funicular ya tiene su encanto.',tags:['Parque atracciones','€€€','Vistas 360°','Histórico']}
+    ]},
+    museos:{tip:'El primer domingo de cada mes muchos museos son gratuitos. Consulta horarios en la web de cada museo.',items:[
+      {name:'Museu Picasso',location:'El Born, Carrer de Montcada 15–23',badge:'badge-museum',desc:'La colección de Picasso más importante del mundo, con más de 4.000 obras de sus primeros años en Barcelona. Los palacios medievales donde está ubicado son tan impresionantes como las obras.',tags:['Arte','Picasso','€€','Reserva online']},
+      {name:'MACBA',location:'El Raval, Plaça dels Àngels 1',badge:'badge-museum',desc:'El museo de arte contemporáneo de Barcelona en un edificio blanco espectacular de Richard Meier. Colección permanente e internacional desde los años 50 hasta hoy.',tags:['Arte contemporáneo','€','Arquitectura']},
+      {name:'Fundació Joan Miró',location:'Montjuïc, Parc de Montjuïc s/n',badge:'badge-museum',desc:'El museo de Joan Miró con más de 10.000 obras. El edificio de Sert es luminoso y perfecto para el arte. Combínalo con una visita al Castillo de Montjuïc.',tags:['Joan Miró','€€','Montjuïc']},
+      {name:'MNAC',location:'Montjuïc, Palau Nacional',badge:'badge-museum',desc:'El palacio más imponente de Barcelona alberga la colección de arte románico más importante del mundo. La vista desde la escalinata hacia la ciudad y el mar es uno de los mejores panoramas de Barcelona.',tags:['Arte románico','€€','Palacio','Vistas']},
+      {name:'CosmoCaixa',location:'Sarrià-Sant Gervasi, Carrer d\'Isaac Newton 26',badge:'badge-museum',desc:'El museo de ciencias más innovador de España, con el único bosque amazónico en un museo de Europa — 1.000 metros cuadrados de selva real con anacondas, caimanes y piranhas.',tags:['Ciencias','€€','Bosque amazónico','Planetario']},
+      {name:'MUHBA (Historia de Barcelona)',location:'Barrio Gótico, Plaça del Rei s/n',badge:'badge-museum',desc:'Bajo la Plaza del Rey se esconden las ruinas de la Barcelona romana del siglo I — puedes caminar literalmente sobre una ciudad de 2.000 años. Uno de los yacimientos arqueológicos más importantes de Europa.',tags:['Historia','Roma antigua','€','Yacimiento arqueológico']}
+    ]},
+    comercio:{tip:'Las tiendas abren de 10h a 21h de lunes a sábado. El Paseo de Gracia es la zona premium; El Born tiene las mejores tiendas independientes.',items:[
+      {name:'Paseo de Gracia',location:'Eixample, desde Plaça Catalunya hasta Diagonal',badge:'badge-shopping',desc:'El boulevard de lujo de Barcelona. Zara, Mango (flagship), Massimo Dutti, H&M, además de Hermès y Louis Vuitton. Las farolas y el pavimento son obra de Gaudí.',tags:['Lujo','Marcas internacionales','Mango flagship']},
+      {name:'El Born (tiendas independientes)',location:'El Born, alrededor del Passeig del Born',badge:'badge-shopping',desc:'El mejor barrio para diseño local, moda independiente y tiendas únicas. Carrer del Rec y Carrer dels Flassaders concentran diseñadoras catalanas emergentes, vintage y joyería artesanal.',tags:['Diseño local','Vintage','Independiente']},
+      {name:'Mercat de Sant Antoni',location:'Eixample esquerra, Carrer del Comte d\'Urgell 1',badge:'badge-shopping',desc:'Mercado modernista restaurado con el mejor mercado de segunda mano de Barcelona los domingos. El mercadillo de libros y comics del domingo es una institución.',tags:['Mercado','Segunda mano','Domingos','Libros']},
+      {name:'El Triangle (Plaça Catalunya)',location:'Plaça Catalunya, centro',badge:'badge-shopping',desc:'El centro comercial más bien ubicado de Barcelona. FNAC (enorme), Sephora, Habitat y varias tiendas de moda. Perfecto si necesitas comprar varias cosas en un mismo sitio.',tags:['Centro comercial','FNAC','Céntrico','Variado']},
+      {name:'Mercado de artesanía de la Catedral',location:'Barrio Gótico, frente a la Catedral',badge:'badge-shopping',desc:'Cada jueves se instalan puestos de artesanía frente a la Catedral de Barcelona. Joyería, cerámica, cuero y objetos únicos hechos a mano. El ambiente medieval del barrio Gótico de fondo es especial.',tags:['Artesanía','Jueves','Gratis','Gótico']}
+    ]},
+    discotheques:{tip:'Barcelona no empieza hasta las 2h de la madrugada. Los clubs cierran a las 5h–6h. Evita las filas reservando entradas online o llegando antes de la 1h. El Puerto Olímpico concentra los clubs de ambiente más internacional.',items:[
+      {name:'Opium Barcelona',location:'Puerto Olímpico, Passeig Marítim de la Barceloneta 34',badge:'badge-disco',desc:'El club más famoso del Puerto Olímpico, frente al mar. Dos pisos con música house y comercial, terraza exterior y ambiente muy internacional. DJs residentes de nivel y noches temáticas los jueves y sábados. Perfecto para mezclar playa de noche con pista de baile.',tags:['Frente al mar','House','Internacional','Jueves y sábados']},
+      {name:'CDLC (Carpe Diem Lounge Club)',location:'Puerto Olímpico, Passeig Marítim de la Barceloneta 32',badge:'badge-disco',desc:'El lounge-club más glamuroso del Puerto Olímpico, con camas balinesas en la terraza y vistas al mar. Música lounge y house de calidad. El ambiente es más sofisticado que Opium pero igual de animado. Perfecto para empezar la noche con una copa antes de seguir.',tags:['Lounge','Terraza marítima','Glamuroso','Sofisticado']},
+      {name:'Razzmatazz',location:'Poblenou, Carrer dels Almogàvers 122',badge:'badge-disco',desc:'El mejor club de música alternativa de Barcelona, con 5 salas simultáneas con géneros distintos: indie, electrónica, techno, pop y rock. Capacidad para 5.000 personas. Los conciertos son de artistas internacionales de primer nivel. El club de los barceloneses reales.',tags:['5 salas','Indie','Electrónica','Conciertos']},
+      {name:'Pacha Barcelona',location:'Puerto Olímpico, Passeig Marítim 38',badge:'badge-disco',desc:'La versión barcelonesa del club más famoso de Ibiza. Ambiente internacional, sesiones de DJs reconocidos y la calidad de la marca Pacha. Más exclusivo y caro que el resto del Puerto Olímpico, pero el nivel musical es consistentemente bueno.',tags:['Exclusivo','DJs internacionales','Marca Pacha','Puerto Olímpico']},
+      {name:'Club Catwalk',location:'Puerto Olímpico, Carrer de la Marina 19–21',badge:'badge-disco',desc:'Club electrónico de referencia en Barcelona con una pista de baile espectacular y sonido de primer nivel. Techno, house y electrónica de calidad. Ambiente más underground que el Opium pero con la misma ubicación privilegiada cerca del mar.',tags:['Electrónica','Techno','Underground','Puerto Olímpico']},
+      {name:'Sala Apolo',location:'El Raval, Carrer Nou de la Rambla 113',badge:'badge-disco',desc:'Una sala de conciertos y club histórico del Raval, en un teatro de los años 40 perfectamente conservado. Los viernes y sábados hay conciertos que terminan en sesión de DJ hasta el amanecer. El ambiente es alternativo y la decoración vintage es única.',tags:['Histórico','Conciertos','Alternativo','Raval']}
+    ]},
+    miradores:{tip:'El mejor momento para los miradores es el atardecer — el sol se pone hacia el mar desde Barcelona. Búnkers del Carmel es el más espectacular pero requiere subir a pie unos 20 minutos.',items:[
+      {name:'Búnkers del Carmel',location:'El Carmel, Turó de la Rovira s/n',badge:'badge-mirador',desc:'La mejor vista de Barcelona sin discusión. Las ruinas de las baterías antiaéreas de la Guerra Civil en la cima del Turó de la Rovira ofrecen un panorama de 360° de la ciudad, el mar y el Tibidabo. Gratis, sin horarios y siempre lleno de gente local tomando cervezas al atardecer. El sitio más fotogénico de Barcelona.',tags:['Mejor vista 360°','Gratis','Atardecer','Guerra Civil']},
+      {name:'Park Güell (terraza)',location:'Gràcia, Carrer d\'Olot s/n',badge:'badge-mirador',desc:'La terraza principal del Park Güell tiene una de las vistas más icónicas de Barcelona — la ciudad y el mar con el banco de mosaicos de Gaudí en primer plano. Requiere ticket para la zona monumental. El amanecer aquí, con la ciudad despertando, es mágico.',tags:['Gaudí','Mosaicos','Vista al mar','€']},
+      {name:'Tibidabo',location:'Tibidabo, cima de la colina a 512m',badge:'badge-mirador',desc:'La cima más alta visible desde Barcelona, con vistas de hasta 70km en días claros. La iglesia del Sagrat Cor en lo alto y el parque de atracciones histórico son el entorno. La subida en funicular y tranvía azul ya es parte de la experiencia.',tags:['La más alta','70km de vistas','Funicular','Día claro']},
+      {name:'Mirador del Migdia (Montjuïc)',location:'Montjuïc, Ctra. de Montjuïc s/n',badge:'badge-mirador',desc:'El mirador secreto de Montjuïc, en el lado opuesto al turístico. Vistas al puerto, al delta del Llobregat y al horizonte marino. La chiringuito informal que hay al lado sirve cervezas frías hasta el atardecer con música de fondo. El lugar favorito de los barceloneses que conocen Montjuïc de verdad.',tags:['Secreto','Vistas al puerto','Chiringuito','Local']},
+      {name:'Torre de Collserola',location:'Serra de Collserola, carretera de Vallvidrera al Tibidabo',badge:'badge-mirador',desc:'La antena de telecomunicaciones de Norman Foster tiene una plataforma de observación a 560 metros. Vistas de 360° que en días claros llegan hasta Mallorca. Accesible desde el funicular de Vallvidrera. El mirador más alto de la ciudad.',tags:['Más alto de Barcelona','Norman Foster','360°','Hasta Mallorca']}
+    ]}
   },
-  {
-    id: 'madrid', name: 'Madrid', country: 'España', flag: '🇪🇸',
-    desc: 'Capital vibrante con los mejores museos de Europa, tapas de madrugada y parques enormes.',
-    bestTime: 'Abr–Jun, Sep–Nov', avgTemp: '19°C', currency: 'Euro',
-    days: [
-      {
-        label: 'Día 1', theme: 'El Prado y los tapas clásicos',
-        tip: 'El Museo del Prado es gratis las últimas 2 horas del día. Para tapas, la zona de La Latina es el epicentro los domingos.',
-        stops: [
-          { time: '9:00', period: 'AM', name: 'Mercado de San Miguel', detail: 'Desayuno de vermut y croquetas en el mercado gourmet frente al Palacio Real.', type: 'food' },
-          { time: '11:00', period: 'AM', name: 'Museo del Prado', detail: 'Velázquez, Goya y El Greco. Uno de los mejores museos del mundo. Reserva 3 horas mínimo.', type: 'culture' },
-          { time: '14:30', period: 'PM', name: 'Lateral (Paseo del Prado)', detail: 'Cocina mediterránea clásica. Vistas al bulevar. Perfecto para comer después del museo.', type: 'food' },
-          { time: '16:30', period: 'PM', name: 'Retiro y el Palacio de Cristal', detail: 'El pulmón verde de Madrid. Alquila un bote en el estanque y visita el invernadero victoriano.', type: 'nature' },
-          { time: '19:00', period: 'PM', name: 'La Latina', detail: 'El barrio de tapas por excelencia. La Cava Baja es la calle clave. Prueba Casa Lucio.', type: 'food' },
-          { time: '23:00', period: 'PM', name: 'Lola Club / Kapital', detail: 'La noche madrileña empieza después de las 11. Kapital tiene 7 pisos con distintos ambientes.', type: 'nightlife' }
-        ]
-      },
-      {
-        label: 'Día 2', theme: 'Arte contemporáneo y Malasaña',
-        tip: 'El Reina Sofía tiene el Guernica de Picasso — la sala está siempre llena, mejor llegar en la mañana.',
-        stops: [
-          { time: '10:00', period: 'AM', name: 'Museo Reina Sofía', detail: 'Arte español del siglo XX. El Guernica de Picasso es el imprescindible absoluto.', type: 'culture' },
-          { time: '13:00', period: 'PM', name: 'Bodega de la Ardosa', detail: 'Bar histórico de Malasaña con las mejores patatas bravas de Madrid. De pie, sin pretensiones.', type: 'food' },
-          { time: '15:00', period: 'PM', name: 'Malasaña', detail: 'El barrio más hipster de Madrid. Tiendas vintage, cafés, murales. La plaza del Dos de Mayo es el centro.', type: 'shopping' },
-          { time: '17:30', period: 'PM', name: 'Museo Thyssen-Bornemisza', detail: 'La colección privada más grande de Europa. Impresionismo, expresionismo y arte flamenco.', type: 'culture' },
-          { time: '20:30', period: 'PM', name: 'Chueca', detail: 'Barrio cosmopolita y animado. Los mejores cócteles del centro en El Cock o Salmon Gurú.', type: 'nightlife' },
-          { time: '22:30', period: 'PM', name: 'DiverXO (si el presupuesto da)', detail: 'Tres estrellas Michelin de David Muñoz. Reserva imposible — pero si logras mesa, experiencia de vida.', type: 'food' }
-        ]
-      }
-    ]
+
+  madrid: {
+    name:'Madrid',flag:'🇪🇸',country:'España',
+    desc:'La capital de España es una ciudad que vive de noche y te sorprende de día. Con el mejor triángulo de museos de Europa, una cultura de tapas inigualable y una energía que no para, Madrid es de esas ciudades que siempre tienen algo más por ofrecer.',
+    bestTime:'Abr–Jun, Sep–Nov',temp:'19°C verano',moneda:'Euro',idioma:'Español',
+    playas:{tip:'Madrid no tiene playa, pero tiene el río Manzanares recuperado con playas urbanas en verano y está a solo 1h de la Sierra de Guadarrama con embalses increíbles.',items:[
+      {name:'Madrid Río (playa urbana)',location:'Madrid Río, junto al río Manzanares',badge:'badge-beach',desc:'En verano el parque Madrid Río instala playas de arena con piscinas junto al río. Hamacas, zona de juegos, bares y música. El plan de playa de los madrileños que no salen de la ciudad.',tags:['Urbana','Gratis','Verano']},
+      {name:'Embalse de Santillana',location:'Manzanares el Real, 50 min en coche',badge:'badge-beach',desc:'El embalse más bonito cerca de Madrid, con el Castillo de Manzanares el Real como telón de fondo. Aguas verdes entre montañas, zona de baño y senderismo.',tags:['Excursión','Embalse','Naturaleza']},
+      {name:'El Espinar / La Losa (Sierra)',location:'1h en coche desde Madrid',badge:'badge-beach',desc:'Los pueblos de la Sierra de Guadarrama tienen ríos y pozas naturales de agua cristalina perfectas para el baño en verano. La Poza de las Ninfas en El Espinar es la más conocida.',tags:['Río','Naturaleza','Sierra']},
+      {name:'Playa de Aranjuez',location:'Aranjuez, 45 min en tren Cercanías',badge:'badge-beach',desc:'El río Tajo a su paso por el Real Sitio de Aranjuez tiene zonas de baño naturales. Combínalo con la visita al Palacio Real y sus jardines.',tags:['Río','Palacio Real','Excursión día']},
+      {name:'Embalse de El Atazar',location:'Sierra Norte de Madrid, 1h en coche',badge:'badge-beach',desc:'El embalse más espectacular de la Comunidad de Madrid. Aguas de color turquesa rodeadas de montañas y pueblos de piedra. Menos conocido que Santillana y mucho más tranquilo.',tags:['Turquesa','Tranquilo','Sierra Norte']}
+    ]},
+    restaurantes:{tip:'Madrid tiene una cultura de tapas gratis con la caña en algunos barrios. La cena no empieza antes de las 21h. Reserva en cualquier sitio medianamente famoso.',items:[
+      {name:'El Brillante',location:'Centro, Plaza del Emperador Carlos V 8',badge:'badge-food',price:'cheap',desc:'El bocadillo de calamares más famoso de Madrid, frente al Reina Sofía. Calamares fritos en pan blanco con alioli. Sin reserva, sin espera. Un clásico absoluto.',tags:['Bocadillo calamares','Clásico','Sin reserva']},
+      {name:'Bodega de la Ardosa',location:'Malasaña, Calle de Colón 13',badge:'badge-food',price:'cheap',desc:'Bar histórico de 1892 con las mejores patatas bravas de Madrid. Pequeño, de pie, con barriles de vino en las paredes. Uno de esos sitios que no ha cambiado en décadas.',tags:['Bar histórico','Patatas bravas','Auténtico']},
+      {name:'Taberna Alhambra',location:'Sol, Calle de la Victoria 9',badge:'badge-food',price:'cheap',desc:'La taberna más auténtica del centro de Madrid, con azulejos sevillanos y tapas que no han cambiado desde los años 50. Boquerones en vinagre, pulpo a la gallega y jamón cortado a mano.',tags:['Taberna','Tapas clásicas','Centro']},
+      {name:'Mercado de San Miguel',location:'Centro, Plaza de San Miguel s/n',badge:'badge-food',price:'mid',desc:'El mercado gourmet más bonito de Madrid, frente al Palacio Real. Ostras, jamón ibérico, vermut, pintxos y pasteles. Perfecto para el aperitivo o un desayuno especial.',tags:['Gourmet','Tapas','Aperitivo']},
+      {name:'Casa Lucio',location:'La Latina, Cava Baja 35',badge:'badge-food',price:'mid',desc:'La institución de los huevos rotos en Madrid. Los reyes de España, actores y políticos comparten este comedor clásico desde 1974. Reserva con días de antelación.',tags:['Clásico','Huevos rotos','Institución madrileña']},
+      {name:'Casa González',location:'Huertas, Calle del León 12',badge:'badge-food',price:'mid',desc:'Quesería, bodega y bar de vinos desde 1931. La selección de quesos españoles es excepcional, y los vinos por copa son de una calidad poco común. Ideal para un aperitivo o cena ligera de picoteo.',tags:['Quesos','Vinos','Desde 1931']},
+      {name:'La Taberna de la Daniela',location:'Salamanca, Calle del General Pardiñas 21',badge:'badge-food',price:'high',desc:'El cocido madrileño más famoso de la ciudad. Se sirve en tres vuelcos como manda la tradición: sopa con fideos, garbanzos con verduras y finalmente las carnes.',tags:['Cocido madrileño','Tradicional']},
+      {name:'Salmon Gurú',location:'Huertas, Calle del Echegaray 21',badge:'badge-food',price:'high',desc:'Elegido uno de los mejores bares de cócteles del mundo. Los cócteles de Diego Cabrera son obras de arte. Llega antes de las 20h si no quieres esperar.',tags:['Cócteles','Premiado','Noche']},
+      {name:'DiverXO',location:'Tetuán, Calle de Padre Damián 23',badge:'badge-food',price:'high',desc:'Tres estrellas Michelin de David Muñoz. Un menú degustación que mezcla Asia, España y técnica de vanguardia en una experiencia de 3-4 horas. Reserva con 3 meses de anticipación.',tags:['3 estrellas Michelin','Reserva 3 meses antes']}
+    ]},
+    actividades:{tip:'El Parque del Retiro es enorme y precioso — mete al menos 2 horas. El Rastro solo existe los domingos por la mañana en La Latina.',items:[
+      {name:'Parque del Retiro',location:'Retiro, Plaza de la Independencia s/n',badge:'badge-activity',desc:'El parque más querido de Madrid, 340 hectáreas en el centro. Alquila un bote en el estanque, visita el Palacio de Cristal (exposiciones gratuitas) y pasea entre estatuas. Los domingos hay músicos y artistas por todos lados.',tags:['Gratis','Imprescindible','Barca en el estanque']},
+      {name:'El Rastro',location:'La Latina, Calle de la Ribera de Curtidores',badge:'badge-activity',desc:'El mercadillo más famoso de España, solo los domingos de 9h a 15h. Más de 3.500 puestos de ropa vintage, antigüedades, libros y vinilos. Después, La Latina se llena para el vermut dominical.',tags:['Solo domingos','Vintage','Mercadillo']},
+      {name:'Palacio Real',location:'Centro, Calle de Bailén s/n',badge:'badge-activity',desc:'El palacio real más grande de Europa Occidental, con 3.418 habitaciones. La Sala del Trono, la Armería Real y los jardines de Sabatini son imprescindibles. El cambio de guardia (miércoles y sábados al mediodía) es espectacular.',tags:['Historia','€€','Cambio de guardia']},
+      {name:'Barrio de Malasaña',location:'Centro, alrededor de la Plaza del Dos de Mayo',badge:'badge-activity',desc:'El barrio más hipster y bohemio de Madrid. Calles con murales, tiendas vintage, cafés de especialidad y bares que mezclan lo antiguo con lo nuevo.',tags:['Barrio','Alternativo','Murales']},
+      {name:'Barrio de Chueca',location:'Centro',badge:'badge-activity',desc:'El barrio más cosmopolita y animado de Madrid. Restaurantes de todo tipo, tiendas de diseño, terrazas y la mejor vida nocturna del centro. La Plaza de Chueca es el epicentro.',tags:['Cosmopolita','Terrazas','Vida nocturna']},
+      {name:'Templo de Debod',location:'Moncloa, Parque del Oeste',badge:'badge-activity',desc:'Un templo egipcio de 2.200 años trasladado piedra a piedra a Madrid. Completamente gratis. La terraza tiene la mejor vista del atardecer de Madrid — el sol se pone exactamente detrás de la Casa de Campo.',tags:['Gratis','Egipcio','Atardecer','Instagram']}
+    ]},
+    museos:{tip:'El Triángulo del Arte (Prado, Reina Sofía y Thyssen) está todo en el mismo paseo. Imposible verlos todos en un día — elige según tus gustos.',items:[
+      {name:'Museo del Prado',location:'Retiro, Paseo del Prado s/n',badge:'badge-museum',desc:'Uno de los tres mejores museos del mundo. Velázquez, Goya, El Greco, Rubens y Tiziano en salas que te dejan sin palabras. Las Meninas y los cuadros negros de Goya son los imprescindibles. Gratis las últimas 2 horas del día.',tags:['Imprescindible','Velázquez','Goya','Gratis tarde']},
+      {name:'Museo Reina Sofía',location:'Atocha, Calle de Santa Isabel 52',badge:'badge-museum',desc:'El museo de arte moderno español. El Guernica de Picasso es la pieza central — una sala entera dedicada a esa obra maestra. También tiene la mejor colección de Dalí y Miró fuera de sus propios museos.',tags:['Guernica','Picasso','Dalí']},
+      {name:'Museo Thyssen-Bornemisza',location:'Centro, Paseo del Prado 8',badge:'badge-museum',desc:'La colección privada más grande de Europa. Cubre desde el siglo XIII hasta el arte pop americano, pasando por impresionistas y surrealistas. Lo que el Prado no tiene, lo tiene el Thyssen.',tags:['Impresionismo','Arte flamenco']},
+      {name:'Museo Sorolla',location:'Almagro, Paseo del General Martínez Campos 37',badge:'badge-museum',desc:'La casa-estudio del pintor valenciano Joaquín Sorolla, conservada exactamente como él la dejó en 1923. Los jardines mediterráneos del interior son inesperadamente preciosos en el centro de Madrid.',tags:['Casa-museo','Sorolla','Jardines','€']},
+      {name:'CaixaForum Madrid',location:'Retiro, Paseo del Prado 36',badge:'badge-museum',desc:'Espacio cultural en un edificio industrial transformado, con un jardín vertical de Patrick Blanc en la fachada. Las exposiciones temporales son siempre de primer nivel. Precio muy razonable.',tags:['Exposiciones temporales','€','Jardín vertical']}
+    ]},
+    comercio:{tip:'El Corte Inglés de Callao es el más grande de España. Para shopping de diseño, el Barrio de Salamanca es el equivalente madrileño al Paseo de Gràcia.',items:[
+      {name:'Gran Vía',location:'Centro, desde Alcalá hasta Plaza de España',badge:'badge-shopping',desc:'La gran avenida comercial de Madrid. Zara, H&M, Primark (enorme), Mango y El Corte Inglés. Siempre llena de vida.',tags:['Marcas populares','Primark','Animada']},
+      {name:'Barrio de Salamanca',location:'Salamanca, alrededor de Serrano y Jorge Juan',badge:'badge-shopping',desc:'El barrio más elegante de Madrid concentra el lujo: Loewe, Balenciaga, Carolina Herrera, Manolo Blahnik. Calle Serrano es la más exclusiva. Calle Jorge Juan tiene opciones más asequibles.',tags:['Lujo','Loewe','Diseño español']},
+      {name:'El Rastro (mercadillo)',location:'La Latina, Ribera de Curtidores',badge:'badge-shopping',desc:'Solo los domingos 9h–15h. Más de 3.500 puestos. Ropa vintage, antigüedades, vinilos, libros, arte. Requiere paciencia pero los hallazgos pueden ser increíbles.',tags:['Solo domingos','Vintage','Antigüedades']},
+      {name:'Mercado de Motores',location:'Arganzuela, Calle Méndez Álvaro s/n',badge:'badge-shopping',desc:'El mercado vintage más especial de Madrid, el segundo fin de semana de cada mes en el Museo del Ferrocarril. Antigüedades, diseño, moda vintage y gastronomía entre locomotoras antiguas.',tags:['2º fin de semana del mes','Antigüedades','Ferrocarril']}
+    ]},
+    discotheques:{tip:'La noche madrileña empieza tarde — los clubs no se llenan hasta las 2h–3h. El barrio de Chueca tiene los mejores bares para empezar antes de los clubs. Kapital es la experiencia más icónica.',items:[
+      {name:'Kapital',location:'Retiro, Calle de Atocha 125',badge:'badge-disco',desc:'El club más famoso de Madrid, con 7 pisos y un ambiente diferente en cada uno: house, r&b, pop español, terraza, karaoke y más. Capacidad para 4.000 personas en un teatro del siglo XIX reconvertido. Turístico pero completamente impresionante. Los viernes y sábados son los mejores días.',tags:['7 pisos','Icónico','Viernes y sábados','Teatro histórico']},
+      {name:'Lola Club',location:'Centro, Calle de la Reina 25',badge:'badge-disco',desc:'El club de moda del centro de Madrid, con una decoración de terciopelo y espejos que mezcla el glamour de los años 70 con el sonido más actual. House, disco y pop. Ambiente sofisticado y clientela joven y bien vestida. Lista de espera los fines de semana — reserva mesa.',tags:['Glamuroso','House','Disco','Reserva mesa']},
+      {name:'Teatro Barceló',location:'Malasaña, Calle de Barceló 11',badge:'badge-disco',desc:'El club más elegante de Malasaña, en un antiguo teatro con palcos y galería. Los viernes tiene sesiones de electrónica de calidad y los sábados pop y house más comercial. El edificio en sí ya justifica la visita — la pista de baile en el escenario del teatro es espectacular.',tags:['Teatro histórico','Electrónica','Pop','Malasaña']},
+      {name:'Mondo Disko',location:'Legazpi, Calle del Doctor Fourquet 33',badge:'badge-disco',desc:'La sala de referencia para la música disco, funk y boogie de calidad en Madrid. Ambiente underground y sin postureo. El espacio es pequeño y íntimo, con una colección de discos de vinilo en las paredes. Los DJs residentes son los mejores seleccionadores de la ciudad.',tags:['Disco','Funk','Vinilo','Underground']},
+      {name:'Fabrik',location:'Humanes de Madrid, Av. de la Industria 82',badge:'badge-disco',desc:'El club de música electrónica más grande de España, a 30 minutos de Madrid en taxi o autobús nocturno. Capacidad para 15.000 personas en una antigua fábrica. DJs internacionales de primer nivel cada fin de semana. La experiencia de techno y house más completa de España.',tags:['Más grande de España','Techno','15.000 personas','DJs internacionales']}
+    ]},
+    miradores:{tip:'El atardecer sobre Madrid desde el Templo de Debod es el más fotogénico. Para el mejor panorama general, sube a las azoteas del CaixaForum o al Círculo de Bellas Artes.',items:[
+      {name:'Templo de Debod',location:'Moncloa, Parque del Oeste',badge:'badge-mirador',desc:'La terraza alrededor del templo egipcio tiene la vista de atardecer más espectacular de Madrid. El sol se pone exactamente hacia la Casa de Campo y el cielo se llena de colores. El sitio más fotografiado de Madrid al atardecer. Completamente gratis.',tags:['Mejor atardecer','Gratis','Templo egipcio','Instagram']},
+      {name:'Azotea del Círculo de Bellas Artes',location:'Centro, Calle de Alcalá 42',badge:'badge-mirador',desc:'La azotea más icónica de Madrid, con vista de 360° sobre los tejados y el skyline del centro. El Palacio de Comunicaciones, la Puerta de Alcalá y la Sierra de Guadarrama al fondo. Una copa en la barra de la azotea mientras el sol se pone es una experiencia de Madrid imprescindible.',tags:['360°','€ entrada','Skyline Madrid','Copa con vistas']},
+      {name:'Faro de Moncloa',location:'Moncloa, Avenida de la Memoria s/n',badge:'badge-mirador',desc:'La torre de telecomunicaciones de Sáenz de Oíza tiene una plataforma de observación a 92 metros con vistas impresionantes hacia la Sierra de Guadarrama y toda la ciudad. Las vistas al oeste (puesta de sol sobre la Sierra) son espectaculares. Precio muy razonable.',tags:['92 metros','Sierra Guadarrama','€','Puesta de sol al oeste']},
+      {name:'Mirador del Retiro (Colina de los Chopos)',location:'Retiro, dentro del parque',badge:'badge-mirador',desc:'El punto más alto del Parque del Retiro ofrece una vista panorámica sobre el parque y la ciudad al fondo. Desde aquí se ve perfectamente la alineación del Paseo del Prado con el Prado, el Reina Sofía y el Thyssen. Completamente gratis y sin turistas masivos.',tags:['Gratis','Dentro del Retiro','Sin masas']},
+      {name:'Azotea del Hotel Gran Vía (Vincci)](https://www.vinccihoteles.com)',location:'Gran Vía, Calle de la Montera 47',badge:'badge-mirador',desc:'La terraza del hotel Vincci sobre la Gran Vía tiene las mejores vistas del bulevar más famoso de Madrid — ves los edificios art déco desde arriba, con el Edificio Metrópolis justo enfrente. Paga la copa y tienes acceso. Imprescindible para una foto única de Madrid.',tags:['Gran Vía desde arriba','Copa con vistas','Edificio Metrópolis','Art Déco']}
+    ]}
   },
-  {
-    id: 'roma', name: 'Roma', country: 'Italia', flag: '🇮🇹',
-    desc: 'La Ciudad Eterna. Ruinas milenarias, pasta perfecta, y la sensación de caminar por la historia.',
-    bestTime: 'Abr–Jun, Sep–Oct', avgTemp: '20°C', currency: 'Euro',
-    days: [
-      {
-        label: 'Día 1', theme: 'El Vaticano y el Trastevere',
-        tip: 'Los Museos Vaticanos son obligatorios con reserva previa. El miércoles el Papa da audiencia pública en la Plaza de San Pedro — es gratis.',
-        stops: [
-          { time: '7:30', period: 'AM', name: 'Bar San Calisto', detail: 'Desayuno romano clásico: cappuccino y cornetto. En Trastevere, la zona más auténtica de Roma.', type: 'food' },
-          { time: '9:00', period: 'AM', name: 'Museos Vaticanos + Capilla Sixtina', detail: 'El techo de Miguel Ángel. Reserva con semanas de anticipación. Tour guiado recomendado.', type: 'culture' },
-          { time: '13:00', period: 'PM', name: 'Pizzarium (Bonci)', detail: 'La pizza al taglio más famosa del mundo. En el barrio Prati, cerca del Vaticano.', type: 'food' },
-          { time: '15:00', period: 'PM', name: "Castel Sant'Angelo", detail: 'El mausoleo romano que se convirtió en fortaleza papal. Vista espectacular del Tíber.', type: 'culture' },
-          { time: '17:30', period: 'PM', name: 'Trastevere', detail: 'El barrio más romántico de Roma. Callejuelas de adoquines, hiedra en las paredes y plazas animadas.', type: 'nature' },
-          { time: '20:30', period: 'PM', name: 'Da Enzo al 29', detail: 'Trattoria romana auténtica en Trastevere. Cacio e pepe y carbonara como deben ser.', type: 'food' }
-        ]
-      },
-      {
-        label: 'Día 2', theme: 'Coliseo, Foro Romano y Fontana di Trevi',
-        tip: 'Compra el ticket combinado Coliseo + Foro Romano + Palatino. Reserva online con al menos 3 días de anticipación.',
-        stops: [
-          { time: '8:00', period: 'AM', name: 'Coliseo', detail: 'El anfiteatro más famoso del mundo. Llega temprano para evitar las multitudes.', type: 'culture' },
-          { time: '10:30', period: 'AM', name: 'Foro Romano y Palatino', detail: 'El corazón de la Roma antigua. Caminas literalmente sobre los cimientos del Imperio.', type: 'culture' },
-          { time: '13:30', period: 'PM', name: 'Hostaria Romana', detail: 'Cerca del Foro, pasta al dente y saltimbocca. Almuerzo clásico romano sin trampa turística.', type: 'food' },
-          { time: '15:30', period: 'PM', name: 'Fontana di Trevi', detail: 'La fuente más famosa del mundo. Lanza tu moneda de espaldas. Mejor a media tarde.', type: 'culture' },
-          { time: '17:00', period: 'PM', name: 'Piazza Navona', detail: 'Tres fuentes de Bernini en una plaza barroca perfecta. Los artistas callejeros dan vida al lugar.', type: 'culture' },
-          { time: '19:30', period: 'PM', name: "Campo de' Fiori", detail: 'La plaza de mercado que se transforma en bar a cielo abierto. Aperitivo en Er Buchetto.', type: 'nightlife' }
-        ]
-      }
-    ]
+
+  roma: {
+    name:'Roma',flag:'🇮🇹',country:'Italia',
+    desc:'La Ciudad Eterna tiene 2.800 años de historia en cada esquina. La combinación de ruinas antiguas, arte renacentista, comida increíble y el caos romano hacen de Roma una experiencia única e irrepetible.',
+    bestTime:'Abr–Jun, Sep–Oct',temp:'20°C verano',moneda:'Euro',idioma:'Italiano',
+    playas:{tip:'Roma no tiene playa propia pero Ostia está a 30 minutos en tren. Para algo más bonito, Sperlonga o Sabaudia requieren coche pero valen la pena.',items:[
+      {name:'Lido di Ostia',location:'30 min en tren desde Roma Termini',badge:'badge-beach',desc:'La playa de los romanos, a 30 minutos en tren directo. No es la playa más bonita de Italia, pero cumple perfectamente. Hay playas libres (gratis) y estabilimenti (pago, con hamacas). Ambiente completamente local.',tags:['30 min desde Roma','Fácil acceso','Local']},
+      {name:'Sperlonga',location:'1h30 en coche o autobús desde Roma',badge:'badge-beach',desc:'El secreto mejor guardado cerca de Roma. Un pueblo blanco encima de una colina con una playa larga de arena blanca y aguas cristalinas. El pueblo medieval sobre el acantilado es precioso.',tags:['Excursión','Aguas cristalinas','Pueblo medieval']},
+      {name:'Sabaudia (Parco del Circeo)',location:'1h30 en coche desde Roma',badge:'badge-beach',desc:'Una de las playas más bonitas del Lazio, dentro de un parque nacional. Dunas de arena, agua verde esmeralda y una laguna protegida. Sin masificación turística.',tags:['Parque nacional','Dunas','Sin masificación']},
+      {name:'Santa Marinella',location:'1h en tren desde Roma Termini',badge:'badge-beach',desc:'La escapada de playa más fácil desde Roma en tren. Pueblo marinero con playa de arena oscura volcánica, un castillo medieval en el promontorio y restaurantes de marisco en el puerto.',tags:['1h en tren','Castillo medieval','Marisco']}
+    ]},
+    restaurantes:{tip:'Evita los restaurantes con menú en 10 idiomas en la puerta. Los mejores sitios tienen menú escrito a mano y solo en italiano. La carbonara NUNCA lleva nata.',items:[
+      {name:'Bar San Calisto',location:'Trastevere, Piazza di San Calisto 4',badge:'badge-food',price:'cheap',desc:'El bar más auténtico del Trastevere. El cappuccino de la mañana cuesta 1€, las bebidas son baratas y el ambiente es puro Roma de barrio. Una visita cultural imprescindible.',tags:['Cappuccino','Auténtico','Sin pretensiones']},
+      {name:'Supplì Roma',location:'Trastevere, Via di San Francesco a Ripa 137',badge:'badge-food',price:'cheap',desc:'Los mejores supplì (croquetas de arroz con ragù y mozzarella fundida) de Roma. Crujientes por fuera, cremosos por dentro con el queso que se estira. Cola siempre pero avanza rápido.',tags:['Supplì','Callejero','Trastevere']},
+      {name:'Pizzarium (Bonci)',location:'Prati, Via della Meloria 43',badge:'badge-food',price:'cheap',desc:'La pizza al taglio más famosa del mundo. Masa madre y combinaciones que van mucho más allá de la margherita clásica. Pagas por peso, comes de pie. Cerca del Vaticano.',tags:['Pizza al taglio','De pie','Cerca del Vaticano']},
+      {name:'Da Enzo al 29',location:'Trastevere, Via dei Vascellari 29',badge:'badge-food',price:'mid',desc:'La trattoria más auténtica del Trastevere. Familiar, pequeña y sin concesiones turísticas. Cacio e pepe, carbonara y amatriciana entre las mejores de Roma. Reserva con al menos 2 días.',tags:['Auténtico','Pasta romana','Reserva obligatoria']},
+      {name:'Osteria dell\'Angelo',location:'Prati, Via Giuseppe Bettolo 24',badge:'badge-food',price:'mid',desc:'La ostería más auténtica del barrio de Prati, con menú fijo que cambia cada día según el mercado. Los jueves: gnocchi al ragù. Los viernes: bacalà. Reserva obligatoria.',tags:['Menú del día','Gnocchi jueves','Bacalà viernes']},
+      {name:'Roscioli',location:'Campo de\' Fiori, Via dei Giubbonari 21',badge:'badge-food',price:'high',desc:'Mitad salumería, mitad restaurante de alta calidad. La mejor selección de jamones y quesos italianos, más una pasta carbonara que muchos consideran la mejor de Roma. Vinos excepcionales.',tags:['Salumería','Carbonara','Vinos']},
+      {name:'Il Sorpasso',location:'Prati, Via Properzio 31',badge:'badge-food',price:'high',desc:'El aperitivo más elegante de Roma en Prati. De 18h a 21h sirven un buffet de embutidos y quesos incluido con la copa. La carta de vinos naturales es de las mejores de la ciudad.',tags:['Aperitivo','Vinos naturales','Prati']}
+    ]},
+    actividades:{tip:'El Coliseo, los Museos Vaticanos y la Galería Borghese requieren reserva online OBLIGATORIA en temporada alta. El metro de Roma tiene solo 2 líneas — muchos sitios se llegan mejor a pie.',items:[
+      {name:'Coliseo + Foro Romano + Palatino',location:'Centro histórico, Piazza del Colosseo',badge:'badge-activity',desc:'El anfiteatro más famoso del mundo y las ruinas del corazón del Imperio Romano, todo en el mismo ticket combinado. El Foro Romano es caminar literalmente sobre los cimientos de la civilización occidental.',tags:['Imprescindible','Reserva online','€€','Ticket combinado']},
+      {name:'Vaticano y Plaza de San Pedro',location:'Vaticano',badge:'badge-activity',desc:'La Plaza de San Pedro de Bernini es una de las obras arquitectónicas más impresionantes jamás construidas. El miércoles el Papa da audiencia pública gratis. La Basílica de San Pedro es gratuita.',tags:['Basílica gratis','Audiencia papal miércoles']},
+      {name:'Trastevere (barrio)',location:'Trastevere, al otro lado del Tíber',badge:'badge-activity',desc:'El barrio más romántico y auténtico de Roma. Callejuelas de adoquines, casas con hiedra, plazas con fuentes y una vida de barrio que el centro ha perdido. De noche se llena de vida.',tags:['Gratis','Romántico','Fotogénico','Noche animada']},
+      {name:'Piazza Navona',location:'Centro histórico',badge:'badge-activity',desc:'La plaza más elegante de Roma, construida sobre un estadio romano del siglo I. Las tres fuentes de Bernini son obras maestras del barroco. Artistas callejeros y atmósfera única. Gratis.',tags:['Gratis','Bernini','Artistas callejeros']},
+      {name:'Mercato di Porta Portese',location:'Trastevere, Via Portuense',badge:'badge-activity',desc:'El mercado de pulgas más grande de Roma, solo los domingos de 7h a 14h. Miles de puestos con antigüedades, ropa vintage, libros y objetos extraños. Ojo con los carteristas.',tags:['Solo domingos','Pulgas','Vintage']}
+    ]},
+    museos:{tip:'Los Museos Vaticanos son los más visitados del mundo — reserva con al menos una semana de antelación. La Galería Borghese solo permite 360 personas a la vez.',items:[
+      {name:'Museos Vaticanos + Capilla Sixtina',location:'Vaticano, Viale Vaticano',badge:'badge-museum',desc:'La mayor colección de arte del mundo, culminando en la Capilla Sixtina de Miguel Ángel. El techo — La Creación de Adán — es la imagen más reproducida del Renacimiento. Reserva online obligatoria.',tags:['Imprescindible','Reserva obligatoria','€€€','Miguel Ángel']},
+      {name:'Galería Borghese',location:'Villa Borghese, Piazzale Scipione Borghese 5',badge:'badge-museum',desc:'Las esculturas de Bernini (Apolo y Dafne, El Rapto de Proserpina) son de una perfección técnica sobrenatural. Solo 360 personas por turno de 2 horas. Reserva con semanas de antelación.',tags:['Bernini','Reserva muy anticipada','€€']},
+      {name:'Palazzo Massimo',location:'Termini, Largo di Villa Peretti 2',badge:'badge-museum',desc:'El mejor museo de arte romano clásico de Roma y el menos visitado. Los frescos romanos del siglo I y los mosaicos están perfectamente conservados. Sin colas, sin masificación.',tags:['Arte romano','€','Sin colas','Poco conocido']},
+      {name:'Musei Capitolini',location:'Capitolio, Piazza del Campidoglio 1',badge:'badge-museum',desc:'Los museos más antiguos del mundo (fundados en 1471). La estatua ecuestre de Marco Aurelio y la Lupa Capitolina son las piezas estrella. Las vistas al Foro Romano desde la terraza son las mejores de Roma.',tags:['Los más antiguos del mundo','€€','Vistas al Foro']}
+    ]},
+    comercio:{tip:'Roma no es la mejor ciudad de Italia para compras — Milán gana ese título. Pero tiene cosas únicas: el barrio Monti para diseño independiente y los mejores mercados de pulgas.',items:[
+      {name:'Via Condotti y alrededores',location:'Spagna, Via Condotti',badge:'badge-shopping',desc:'La calle de lujo de Roma, saliendo de la Plaza de España. Gucci, Prada, Louis Vuitton, Valentino y las grandes casas italianas. Aunque no compres, pasear por el Tridente es un placer visual.',tags:['Lujo','Diseñadores italianos','Tridente']},
+      {name:'Barrio Monti (tiendas)',location:'Monti, entre el Coliseo y Termini',badge:'badge-shopping',desc:'El barrio más hip de Roma. Tiendas de diseño independiente, estudios de artistas y librerías especializadas en calles adoquinadas. La Via del Boschetto y Via Urbana concentran lo mejor.',tags:['Hip','Independiente','Via Urbana']},
+      {name:'Mercato Monti',location:'Monti, Via Leonina 46',badge:'badge-shopping',desc:'El mercado de diseño y vintage más cool de Roma, los fines de semana. Diseñadores locales emergentes, ropa vintage cuidada, joyería artesanal. El barrio de Monti alrededor es el más bohemio de Roma.',tags:['Fines de semana','Diseño local','Vintage']},
+      {name:'Porta Portese (mercadillo)',location:'Trastevere, Via Portuense',badge:'badge-shopping',desc:'El mercadillo de pulgas más grande de Roma, solo los domingos de 7h a 14h. Antigüedades, ropa vintage, libros y objetos extraños. Un clásico romano que no ha cambiado en décadas.',tags:['Solo domingos','Antigüedades','Vintage']}
+    ]},
+    discotheques:{tip:'Roma no tiene la escena nocturna de Ibiza o Barcelona, pero en verano los clubs al aire libre junto al Tíber son únicos. La zona de Testaccio concentra los mejores clubs.',items:[
+      {name:'Goa Club',location:'Ostiense, Via Giuseppe Libetta 13',badge:'badge-disco',desc:'El club de referencia para música electrónica en Roma, en el barrio de Ostiense. Techno y house de calidad con DJs internacionales de primer nivel. Espacio industrial reconvertido con una pista de baile espectacular y un sonido excepcional. El favorito de los romanos que entienden de música.',tags:['Electrónica','Techno','DJs internacionales','Industrial']},
+      {name:'Akab Club',location:'Testaccio, Via di Monte Testaccio 68',badge:'badge-disco',desc:'El club más animado del barrio de Testaccio, el barrio de la noche romana. Música que mezcla house, funk y pop en un espacio de dos pisos. El ambiente es de romanos reales, sin postureo turístico. La terraza del primer piso en verano es perfecta.',tags:['Testaccio','House','Funk','Local']},
+      {name:'Piper Club',location:'Salario, Via Tagliamento 9',badge:'badge-disco',desc:'El club más histórico de Roma, abierto desde 1965. Aquí tocaron los Beatles, Led Zeppelin y los Rolling Stones. Hoy tiene noches temáticas de pop, retro y dance que lo mantienen lleno de gente. Una visita a la historia de la noche romana.',tags:['Histórico','Desde 1965','Pop','Retro']},
+      {name:'Shari Vari Playhouse',location:'Flaminio, Via Flaminia 30',badge:'badge-disco',desc:'El club más sofisticado de Roma, en el barrio del MAXXI (Museo de Arte del Siglo XXI). Tres espacios con música electrónica, house y techno de calidad. Ambiente de diseño y clientela internacional. DJs europeos de primera línea los fines de semana.',tags:['Sofisticado','Electrónica','Flaminio','Internacional']},
+      {name:'Lanificio 159',location:'Pietralata, Via Pietralata 159',badge:'badge-disco',desc:'Una antigua fábrica de lana reconvertida en espacio cultural y club, al norte de Roma. Conciertos, exposiciones de arte y sesiones de DJ en un espacio enorme con jardín exterior. El ambiente más alternativo y underground de Roma, frecuentado por artistas y estudiantes de diseño.',tags:['Alternativo','Fábrica reconvertida','Jardín exterior','Underground']}
+    ]},
+    miradores:{tip:'El Gianicolo tiene la mejor vista general de Roma. La Terraza Pinciana en los jardines de Villa Borghese es la más tranquila y menos conocida.',items:[
+      {name:'Gianicolo (Terraza del Gianicolo)',location:'Gianicolo, colina sobre Trastevere',badge:'badge-mirador',desc:'La colina del Gianicolo tiene el mejor panorama de Roma — 180° sobre los tejados rojos, las cúpulas y el Vaticano al fondo. Todos los días a mediodía disparan un cañonazo histórico que se escucha en toda la ciudad (tradición desde 1847). Completamente gratis y sin masificación.',tags:['Mejor vista de Roma','Gratis','Cañonazo mediodía','Vaticano al fondo']},
+      {name:'Terraza del Vittoriano',location:'Centro histórico, Piazza Venezia',badge:'badge-mirador',desc:'La terraza en lo alto del enorme monumento blanco de la Piazza Venezia ofrece una de las vistas más completas de Roma: el Foro Romano, el Coliseo, los Foros Imperiales y los tejados del centro histórico. Ascensor panorámico de pago, pero vale cada euro.',tags:['Foro Romano desde arriba','€ ascensor','Coliseo','Centro histórico']},
+      {name:'Pincio (jardines de Villa Borghese)',location:'Flaminio, Viale della Trinità dei Monti',badge:'badge-mirador',desc:'El jardín más romántico de Roma, sobre la Piazza del Popolo. Desde el mirador del Pincio se ve perfectamente la cúpula de San Pedro al fondo, los tejados del centro y el río Tíber. El atardecer aquí es de los más tranquilos de Roma. Completamente gratis.',tags:['Gratis','Romántico','San Pedro al fondo','Tranquilo']},
+      {name:'Terraza de Trinità dei Monti (Scalinata)',location:'Spagna, Piazza di Spagna',badge:'badge-mirador',desc:'La escalinata de la Plaza de España sube hasta la iglesia de Trinità dei Monti, desde donde hay una vista espectacular de la Via Condotti y la Via del Corso cortando Roma hasta el Tíber. El mirador más accesible y céntrico de Roma. Gratis.',tags:['Gratis','Plaza de España','Céntrico','Via Condotti']},
+      {name:'Cúpula de San Pedro',location:'Vaticano, Basílica de San Pedro',badge:'badge-mirador',desc:'La cúpula de Miguel Ángel a 136 metros de altura ofrece la vista más espiritual de Roma — el círculo perfecto de la Plaza de San Pedro abajo, y la ciudad extendiéndose hasta el horizonte. Hay ascensor (más caro) o subida a pie por las 551 escaleras (más barato y más épico).',tags:['136 metros','Miguel Ángel','€','Ascensor o escaleras']}
+    ]}
   },
-  {
-    id: 'mallorca', name: 'Mallorca', country: 'España', flag: '🇪🇸',
-    desc: 'La isla mediterránea ideal: calas cristalinas, gastronomía mallorquina y vida de playa sin complicaciones.',
-    bestTime: 'May–Oct', avgTemp: '24°C', currency: 'Euro',
-    days: [
-      {
-        label: 'Día 1', theme: 'Palma y el casco antiguo',
-        tip: 'Alquila una moto o scooter para la isla — la conectividad en transporte público es limitada fuera de Palma.',
-        stops: [
-          { time: '9:30', period: 'AM', name: "Mercat de l'Olivar", detail: 'El mercado central de Palma. Desayuno con ensaimadas recién horneadas y zumo de naranja.', type: 'food' },
-          { time: '11:00', period: 'AM', name: 'Catedral de Mallorca (La Seu)', detail: 'Gótica y con vitrales de Gaudí. Impresionante desde el paseo marítimo.', type: 'culture' },
-          { time: '13:00', period: 'PM', name: 'Celler Sa Premsa', detail: 'La bodega-restaurante más clásica de Palma. Frito mallorquín y vinos locales.', type: 'food' },
-          { time: '16:00', period: 'PM', name: 'Playa de Palma / Cala Major', detail: 'Las playas más accesibles desde Palma. Arena fina y aguas claras mediterráneas.', type: 'nature' },
-          { time: '19:00', period: 'PM', name: 'Paseo del Born', detail: 'El boulevard de Palma para el paseo de la tarde. Tiendas, bares y ambiente local.', type: 'shopping' },
-          { time: '22:00', period: 'PM', name: 'Pacha Mallorca', detail: 'El club más icónico de la isla. Los martes y viernes son las mejores noches.', type: 'nightlife' }
-        ]
-      },
-      {
-        label: 'Día 2', theme: 'Calas del norte y Tramuntana',
-        tip: 'La carretera de la Serra de Tramuntana es Patrimonio UNESCO — conduce despacio y para en cada mirador.',
-        stops: [
-          { time: '8:00', period: 'AM', name: 'Serra de Tramuntana', detail: 'Carretera de montaña por la sierra. Los pueblos de Valldemossa y Deià son imperdibles.', type: 'nature' },
-          { time: '11:30', period: 'AM', name: 'Cala Deiá', detail: 'Cala escondida debajo del pueblo de Deià. Aguas cristalinas y rocas.', type: 'nature' },
-          { time: '14:00', period: 'PM', name: "Ca's Patro March", detail: 'El restaurante más fotogénico de la isla. Arroces y langosta frente al mar. Reserva obligatoria.', type: 'food' },
-          { time: '17:00', period: 'PM', name: 'Cala Formentor', detail: 'La cala más espectacular de Mallorca. Al norte de la isla, rodeada de pinos y acantilados.', type: 'nature' },
-          { time: '20:30', period: 'PM', name: 'Port de Pollença', detail: 'Pueblo marinero tranquilo para cenar mirando los botes. Más local y menos turístico que el sur.', type: 'food' }
-        ]
-      }
-    ]
+
+  mallorca: {
+    name:'Mallorca',flag:'🇪🇸',country:'España',
+    desc:'La isla mediterránea perfecta: calas con agua turquesa entre pinos y acantilados, gastronomía mallorquina de calidad, una capital preciosa y una vida nocturna que va desde el chiringuito familiar hasta el club internacional.',
+    bestTime:'May–Oct',temp:'24°C verano',moneda:'Euro',idioma:'Español / Catalán',
+    playas:{tip:'Para las calas del norte (Formentor, Cala Mesquida) necesitas coche o moto. Alquila con antelación en verano. Las mejores calas se llenan antes de las 10h en julio y agosto.',items:[
+      {name:'Cala Formentor',location:'Formentor, norte de la isla, 1h desde Palma en coche',badge:'badge-beach',desc:'La cala más espectacular de Mallorca. Agua turquesa profunda entre acantilados de pinos y montañas. El aparcamiento se llena antes de las 9h en verano — usa el bus desde Puerto Pollença.',tags:['La más espectacular','Bus desde Pto Pollença','Llega temprano']},
+      {name:'Cala Deiá',location:'Deià, noroeste de la isla',badge:'badge-beach',desc:'Cala escondida debajo del pueblo más bonito de Mallorca. Roca, agua cristalísima y ambiente íntimo. Encima está el restaurante Ca\'s Patro March.',tags:['Íntima','Agua cristalina','Ca\'s Patro March']},
+      {name:'Caló des Moro',location:'Santanyí, sureste de la isla',badge:'badge-beach',desc:'La cala más fotografiada de Mallorca — pequeñísima, redonda perfecta, con agua azul brillante y rodeada de acantilados blancos. Solo caben unas 50 personas. En verano la cola para bajar empieza antes de las 8h.',tags:['La más fotografiada','Pequeña','Madrugar']},
+      {name:'Playa de Muro',location:'Norte de la isla (Alcúdia)',badge:'badge-beach',desc:'La playa de arena más larga y fina de Mallorca, 16km continuos dentro del Parque Natural de S\'Albufera. Aguas poco profundas y perfectas.',tags:['La más larga','Arena fina','Parque natural']},
+      {name:'Cala Mondragó',location:'Santanyí, Parque Natural Mondragó',badge:'badge-beach',desc:'Dos calas pequeñas dentro de un parque natural protegido. Pinos hasta el agua, arena blanca y sin construcciones alrededor.',tags:['Parque natural','Sin edificios','Doble cala']},
+      {name:'Cala Agulla',location:'Capdepera, noreste de la isla',badge:'badge-beach',desc:'Una de las playas más grandes y bonitas del noreste, dentro de una zona protegida con pinos hasta el agua. Arena dorada fina y aguas turquesas. Menos masificada que las calas del sur.',tags:['Arena dorada','Pinos','Noreste']},
+      {name:'Cala Varques',location:'Manacor, este de la isla',badge:'badge-beach',desc:'La cala virgen más famosa de Mallorca — solo accesible a pie (30 min de camino). Sin servicios, sin chiringuito. Solo rocas, pinos, agua cristalina y los que se molestan en llegar.',tags:['30 min a pie','Virgen','Sin servicios']}
+    ]},
+    restaurantes:{tip:'La gastronomía mallorquina es de las mejores de España. No te vayas sin probar: pa amb oli, ensaimada, frito mallorquín y arroz brut.',items:[
+      {name:'Fornet de la Soca',location:'Palma, Carrer de la Puresa 4',badge:'badge-food',price:'cheap',desc:'La mejor pastelería tradicional de Palma. Las ensaimadas son extraordinarias — de llisona, de sobrasada, de cabell d\'àngel. Para desayunar como un mallorquín de verdad.',tags:['Ensaimadas','Desayuno','Tradicional']},
+      {name:'Celler Sa Premsa',location:'Palma, Plaça Bisbe Berenguer de Palou 8',badge:'badge-food',price:'cheap',desc:'La bodega-restaurante más clásica de Palma desde 1958. Barricas de vino en las paredes, cocina mallorquina tradicional: frito mallorquín, arròs brut y pa amb oli.',tags:['Clásico','Mallorquín','Desde 1958']},
+      {name:'Misa Brasería',location:'Palma, Carrer de Can Maçanet 6',badge:'badge-food',price:'mid',desc:'El restaurante más de moda de Palma. Cocina de brasas con producto local — la gamba roja, el cerdo negro y las verduras de temporada son los protagonistas. Ambiente moderno en edificio histórico.',tags:['Moderno','Brasas','De moda']},
+      {name:'Vaca Roja',location:'Port de Pollença',badge:'badge-food',price:'mid',desc:'El mejor restaurante de mariscos y arroces del norte de la isla. La caldereta de langosta y el arroz de gamba roja son los platos por los que vale el viaje.',tags:['Mariscos','Caldereta langosta','Puerto pesquero']},
+      {name:'Ca\'s Patro March',location:'Cala Deiá, Deià',badge:'badge-food',price:'high',desc:'El restaurante más fotogénico e icónico de Mallorca, al borde del agua. Arroces con marisco y langosta y pescado de lonja. Reserva con al menos un mes de anticipación en verano.',tags:['Icónico','Arroces','Reserva 1 mes antes']},
+      {name:'Bon Lloc',location:'Palma, Carrer de Sant Feliu 7',badge:'badge-food',price:'high',desc:'El mejor restaurante vegetariano de Mallorca con una estrella Michelin. Los productos de la huerta mallorquina elevados a otra dimensión. En una casa señorial del siglo XVI en el centro de Palma.',tags:['Vegetariano','1 estrella Michelin','Palma histórica']}
+    ]},
+    actividades:{tip:'La Serra de Tramuntana (Patrimonio UNESCO) tiene algunas de las carreteras con más vistas de España.',items:[
+      {name:'Serra de Tramuntana',location:'Norte y oeste de la isla',badge:'badge-activity',desc:'La cadena montañosa Patrimonio Mundial UNESCO. La carretera de Andratx a Pollença por Valldemossa, Deià y Sóller es uno de los recorridos en coche más espectaculares de Europa.',tags:['Patrimonio UNESCO','Coche necesario','Carretera espectacular']},
+      {name:'Valldemossa',location:'Serra de Tramuntana, 17km de Palma',badge:'badge-activity',desc:'El pueblo más bonito de Mallorca, donde Chopin y George Sand pasaron el invierno de 1838. El Real Cartuja conserva la celda donde Chopin compuso sus Preludios.',tags:['Chopin','Cartuja','Pueblo más bonito']},
+      {name:'Sóller y el tren de madera',location:'Sóller, 30km de Palma',badge:'badge-activity',desc:'El tren vintage de madera de 1912 que va de Palma a Sóller a través de la sierra es una experiencia en sí misma. El pueblo es precioso rodeado de naranjos.',tags:['Tren vintage','Naranjos','€€']},
+      {name:'Coves del Drac',location:'Porto Cristo, este de la isla',badge:'badge-activity',desc:'Las cuevas más espectaculares de Mallorca, con el lago subterráneo navegable más grande del mundo. El concierto de música clásica sobre el lago al final de la visita es algo único en el mundo. Reserva online.',tags:['Cuevas','Lago subterráneo','Concierto en el lago']},
+      {name:'Cap de Formentor (mirador)',location:'Punta norte de la isla',badge:'badge-activity',desc:'El extremo norte de Mallorca, con acantilados de 200 metros sobre el mar y vistas hasta Menorca en días claros. La carretera que llega es de las más emocionantes de España.',tags:['Acantilados','Faro','Vistas hasta Menorca']}
+    ]},
+    museos:{tip:'Mallorca no es un destino de museos pero tiene joyas interesantes — la Fundació Pilar i Joan Miró es la más especial.',items:[
+      {name:'Fundació Pilar i Joan Miró',location:'Palma, Carrer de Joan de Saridakis 29',badge:'badge-museum',desc:'El estudio-museo donde Joan Miró vivió y trabajó los últimos 27 años de su vida. El taller se conserva exactamente como lo dejó — con los colores, los pinceles y los bocetos sobre la mesa.',tags:['Miró','Estudio original','€€']},
+      {name:'Es Baluard',location:'Palma, Plaça de la Porta de Santa Catalina 10',badge:'badge-museum',desc:'El museo de arte contemporáneo de Palma, dentro de una muralla renacentista del siglo XVI con vistas al puerto. Colección permanente con Miró, Picasso y Barceló.',tags:['Arte contemporáneo','Murallas renacentistas','Vistas al puerto']},
+      {name:'Museu Fundació Juan March',location:'Palma, Carrer de Sant Miquel 11',badge:'badge-museum',desc:'Colección de arte español del siglo XX centrada en Picasso, Miró, Dalí y Saura. En el palacio de Can Gallard del Canyar del siglo XVII. Completamente gratuito.',tags:['Gratis','Picasso','Dalí','Miró']}
+    ]},
+    comercio:{tip:'Los mercados locales de los pueblos son la mejor experiencia de compras en Mallorca: Sineu (miércoles), Alcúdia (martes y domingos), Pollença (domingos).',items:[
+      {name:'Passeig del Born (Palma)',location:'Palma, Passeig del Born',badge:'badge-shopping',desc:'El boulevard elegante de Palma con Zara, Massimo Dutti, Loewe y marcas locales. El ambiente es relajado y perfecto para combinar compras con un café en terraza.',tags:['Paseo','Marcas conocidas','Terrazas']},
+      {name:'Mercat de l\'Olivar',location:'Palma, Plaça de l\'Olivar 4',badge:'badge-shopping',desc:'El mercado municipal de Palma con los mejores productos de la isla: ensaimadas, sobrasada, queso mahonés, aceitunas y pescado fresco. Abierto de lunes a sábado por la mañana.',tags:['Mercado','Productos locales','Sobrasada']},
+      {name:'Mercadillo de Sineu (miércoles)',location:'Sineu, centro de la isla',badge:'badge-shopping',desc:'El mercado semanal más auténtico de Mallorca. Miércoles por la mañana. Animales de granja, productos agrícolas, ropa, cerámica y artesanía local.',tags:['Solo miércoles','Auténtico','Artesanía']},
+      {name:'Gordiola (vidrio artesanal)',location:'Algaida, Carretera Palma-Manacor km 19',badge:'badge-shopping',desc:'La fábrica de vidrio artesanal más antigua de Mallorca (1719) sigue produciendo piezas sopladas a mano. Se puede ver a los artesanos trabajar y comprar directamente.',tags:['Artesanía','Vidrio soplado','Fábrica visitable']}
+    ]},
+    discotheques:{tip:'La vida nocturna de Mallorca se concentra en la zona de Magaluf y el Puerto de Alcúdia en el norte. Pacha Mallorca es el más icónico. En Palma hay opciones más tranquilas.',items:[
+      {name:'Pacha Mallorca',location:'Palma, Passeig Marítim 42',badge:'badge-disco',desc:'El club más icónico de Mallorca, en el paseo marítimo de Palma. La marca Pacha garantiza calidad en los DJs y un ambiente internacional de primer nivel. Los viernes de verano son los mejores. Más sofisticado y menos desmadre que los clubs de Magaluf.',tags:['Icónico','Paseo Marítim','DJs internacionales','Viernes']},
+      {name:'BCM Planet Dance',location:'Magaluf, Avinguda S\'Olivera 1',badge:'badge-disco',desc:'El superclub más famoso de Mallorca, con una pista principal para 5.000 personas y un sonido y producción de nivel europeo. Música house y comercial. El ambiente es joven e internacional — es el club de las vacaciones de verano europeas por excelencia.',tags:['5.000 personas','House','Magaluf','Vacaciones europeas']},
+      {name:'Tito\'s Mallorca',location:'Palma, Passeig Marítim 3',badge:'badge-disco',desc:'El club de Palma con más historia, abierto desde los años 50. Vistas al mar desde la terraza y un ascensor panorámico que baja desde el Paseo Marítimo hasta el nivel del club. Música variada y ambiente mixto. Ideal para una noche en Palma sin tener que ir a Magaluf.',tags:['Histórico','Terraza al mar','Ascensor panorámico','Palma']},
+      {name:'Bora Bora Ibiza Beach Club',location:'El Arenal, Platja de Palma',badge:'badge-disco',desc:'El chiringuito-club más famoso de la Platja de Palma, con música electrónica desde las 4 de la tarde hasta bien entrada la noche. Ambiente de playa de día que se convierte en pista de baile al atardecer. El lugar más informal y divertido de la isla para el after-beach.',tags:['Beach club','After-beach','Electrónica','Platja de Palma']}
+    ]},
+    miradores:{tip:'Los miradores de la Serra de Tramuntana son los más espectaculares de la isla. La carretera de Sóller a Pollença es un mirador continuo.',items:[
+      {name:'Cap de Formentor',location:'Punta norte de la isla, 1h30 desde Palma',badge:'badge-mirador',desc:'El mirador más impresionante de Mallorca, en el faro del extremo norte de la isla. Acantilados de 200 metros sobre el Mediterráneo con vistas hasta Menorca en días claros. La carretera para llegar es de las más emocionantes de España — curvas sobre el vacío.',tags:['El más espectacular','Acantilados 200m','Vistas hasta Menorca','Faro']},
+      {name:'Mirador de Ricardo Roca',location:'Andratx, carretera de la costa MA-10',badge:'badge-mirador',desc:'El mirador más fotogénico de la Serra de Tramuntana, en la carretera de la costa del oeste. Vista sobre la cala de Es Llamp y los acantilados de la costa sur en una imagen que parece imposible. Pequeño aparcamiento — llega pronto.',tags:['Serra de Tramuntana','Fotogénico','Costa oeste','MA-10']},
+      {name:'Mirador del Colomer',location:'Pollença, carretera Cap de Formentor',badge:'badge-mirador',desc:'El mirador con la mejor vista del norte de Mallorca — la Cala de Sant Vicenç, la bahía de Pollença y las montañas de la Serra en un panorama completo. A solo 15 minutos desde Puerto Pollença en coche.',tags:['Norte de Mallorca','Bahía de Pollença','Fácil acceso']},
+      {name:'Puig de Randa (cima)',location:'Randa, centro de la isla, 30 min de Palma',badge:'badge-mirador',desc:'El único mirador desde el que se puede ver casi toda la isla simultáneamente. El pueblo de Randa en la cima tiene un santuario franciscano y un radar de aviación. En días claros se ven tanto la bahía de Palma como la de Alcúdia.',tags:['Toda la isla','Santuario','30 min de Palma','Gratis']},
+      {name:'Castell de Bellver',location:'Palma, Camí de Bellver s/n',badge:'badge-mirador',desc:'El castillo circular gótico del siglo XIV sobre una colina de pinos con vistas panorámicas de la bahía de Palma y la catedral. El único castillo circular de España. La terraza exterior tiene una de las mejores vistas de la capital mallorquina.',tags:['Castillo circular','Bahía de Palma','€','Pinos']}
+    ]}
   },
-  {
-    id: 'lisboa', name: 'Lisboa', country: 'Portugal', flag: '🇵🇹',
-    desc: 'La ciudad de las siete colinas, el fado y los pastéis de Belém. Bohemia, melancólica y completamente irresistible.',
-    bestTime: 'Mar–Jun, Sep–Oct', avgTemp: '18°C', currency: 'Euro',
-    days: [
-      {
-        label: 'Día 1', theme: 'Alfama, el fado y Belém',
-        tip: 'Los pastéis de Belém son famosos mundialmente, pero la cola vale la pena. Pídelos calientes con canela y azúcar glass.',
-        stops: [
-          { time: '9:00', period: 'AM', name: 'Time Out Market', detail: 'El mercado gastronómico más famoso del mundo. Desayuno entre los mejores chefs de Lisboa.', type: 'food' },
-          { time: '10:30', period: 'AM', name: 'Alfama (barrio)', detail: 'El barrio más antiguo de Lisboa. Callejuelas empinadas, ropa tendida y vistas increíbles al Tejo.', type: 'culture' },
-          { time: '12:00', period: 'PM', name: 'Miradouro das Portas do Sol', detail: 'El mirador más fotogénico de Alfama. Vista al río Tejo y a los tejados naranja de Lisboa.', type: 'nature' },
-          { time: '13:30', period: 'PM', name: 'A Baiuca', detail: 'Tasca familiar en Alfama con bacalhau auténtico y vino verde. Los lugareños van aquí.', type: 'food' },
-          { time: '15:30', period: 'PM', name: 'Mosteiro dos Jerónimos', detail: 'Arquitectura manuelina en su máxima expresión. El monasterio donde reposa Vasco da Gama.', type: 'culture' },
-          { time: '17:00', period: 'PM', name: 'Pastéis de Belém', detail: 'La pastelería original desde 1837. Los pastéis de nata más famosos del mundo. Sin discusión.', type: 'food' },
-          { time: '22:00', period: 'PM', name: 'Casa de Fado (Alfama)', detail: 'El fado auténtico, sin show turístico. Sr. Fado o A Tasca do Chico para una experiencia real.', type: 'nightlife' }
-        ]
-      },
-      {
-        label: 'Día 2', theme: 'Bairro Alto, LX Factory y el Tejo',
-        tip: 'El LX Factory los domingos tiene el mejor mercadillo vintage de la ciudad. Llega antes del mediodía.',
-        stops: [
-          { time: '10:00', period: 'AM', name: 'Tram 28', detail: 'El tranvía histórico que sube por Alfama y Graça. Más que transporte — es una atracción en sí mismo.', type: 'culture' },
-          { time: '11:30', period: 'AM', name: 'LX Factory', detail: 'Fábrica reconvertida en espacio cultural. Tiendas indie, restaurantes cool y el mercado del domingo.', type: 'shopping' },
-          { time: '13:30', period: 'PM', name: 'Time Out Market (almuerzo)', detail: 'Segunda visita para el almuerzo — cada puesto es un chef distinto. El atún y los mariscos son excepcionales.', type: 'food' },
-          { time: '15:30', period: 'PM', name: 'Bairro Alto', detail: 'El barrio bohemio de Lisboa. De día, galerías y tiendas vintage. De noche, el corazón de la fiesta.', type: 'shopping' },
-          { time: '18:00', period: 'PM', name: 'Miradouro de Santa Catarina', detail: 'El mirador de los hippies y artistas locales. Capoeira, músicos y atardeceres sobre el Tejo.', type: 'nature' },
-          { time: '23:00', period: 'PM', name: 'Bairro Alto (bares)', detail: 'Las calles se llenan de gente con copas. Bar do Gilão o Bicaense para empezar antes de los clubs.', type: 'nightlife' }
-        ]
-      }
-    ]
+
+  lisboa: {
+    name:'Lisboa',flag:'🇵🇹',country:'Portugal',
+    desc:'La capital portuguesa tiene una melancolía especial que los portugueses llaman saudade. Siete colinas, tranvías históricos, pastéis de nata en cada esquina y el fado sonando por las callejuelas de Alfama. Lisboa es una ciudad que se mete debajo de la piel.',
+    bestTime:'Mar–Jun, Sep–Oct',temp:'18°C verano',moneda:'Euro',idioma:'Portugués',
+    playas:{tip:'Las mejores playas de Lisboa están en Cascais y Estoril, a 40 minutos en tren desde Cais do Sodré. El billete de tren es baratísimo y el recorrido costero es precioso.',items:[
+      {name:'Praia de Cascais',location:'Cascais, 40 min en tren desde Cais do Sodré',badge:'badge-beach',desc:'La playa más conocida del área de Lisboa, en el elegante pueblo de Cascais. Arena fina, aguas atlánticas y un pueblo con restaurantes y tiendas que justifican quedarse toda la tarde.',tags:['40 min en tren','Cascais','Pueblo elegante']},
+      {name:'Praia do Guincho',location:'Sintra-Cascais, 10km de Cascais',badge:'badge-beach',desc:'La playa salvaje del Parque Natural de Sintra-Cascais, con dunas enormes y oleaje atlántico perfecto para surf. El paisaje es cinematográfico — sin edificios, solo dunas, pinos y el Atlántico.',tags:['Salvaje','Surf','Parque natural']},
+      {name:'Costa da Caparica',location:'30 min en autobús desde Lisboa',badge:'badge-beach',desc:'30 km continuos de playa atlántica al sur de Lisboa, accesibles en autobús directo. Cada numeración de playa tiene su propia onda. La preferida de los lisboetas.',tags:['30 min','Bus directo','30km de playa']},
+      {name:'Praia de Sesimbra',location:'Sesimbra, 40 min en coche',badge:'badge-beach',desc:'El secreto mejor guardado cerca de Lisboa. Una bahía protegida con aguas más calmadas que el resto de la costa atlántica. El pueblo tiene un castillo árabe y restaurantes de marisco excepcionales.',tags:['Secreto local','Aguas calmadas','Marisco']},
+      {name:'Praia da Adraga',location:'Sintra, 45 min en coche',badge:'badge-beach',desc:'Una de las playas más salvajes y cinematográficas de Portugal, entre acantilados de roca dorada. Sin servicios (solo un pequeño chiringuito) y acceso por una carretera estrecha. Absolutamente impresionante.',tags:['Salvaje','Acantilados dorados','Sin servicios']}
+    ]},
+    restaurantes:{tip:'Los pastéis de nata son sagrados en Lisboa — los originales están en Pastéis de Belém (1837). El bacalhau tiene 365 recetas distintas en Portugal.',items:[
+      {name:'Pastéis de Belém',location:'Belém, Rua de Belém 84–92',badge:'badge-food',price:'cheap',desc:'La pastelería original de los pastéis de nata desde 1837. La cola puede ser larga pero vale la pena — cómelos calientes con canela y azúcar glass en las salas azulejadas.',tags:['Pastéis originales','Cola pero vale','Desde 1837']},
+      {name:'Zé da Mouraria',location:'Mouraria, Rua João do Outeiro 24',badge:'badge-food',price:'cheap',desc:'La tasca más auténtica del barrio de la Mouraria, cuna del fado. Cocina tradicional portuguesa de madre a hija. El caldo verde, el bacalhau à brás y el frango assado son los imprescindibles. Sin carta en inglés, sin turistas.',tags:['Mouraria','Auténtico','Sin turistas']},
+      {name:'A Baiuca',location:'Alfama, Rua de São Miguel 20',badge:'badge-food',price:'cheap',desc:'Tasca familiar en Alfama donde se puede cenar con fado en vivo algunos días. El bacalhau à brás y el caldo verde son los platos que piden los habituales. Llega antes de las 20h.',tags:['Fado en vivo','Tasca','Alfama auténtico']},
+      {name:'Time Out Market',location:'Cais do Sodré, Av. 24 de Julho 49',badge:'badge-food',price:'mid',desc:'El mejor mercado gastronómico del mundo. Más de 35 puestos de los mejores chefs de Lisboa. El atún, las ostras, la degustación de vinos portugueses y los arroces de mariscos son imprescindibles.',tags:['Icónico','Variado','Siempre lleno']},
+      {name:'Taberna da Rua das Flores',location:'Chiado, Rua das Flores 103',badge:'badge-food',price:'mid',desc:'El restaurante de moda más querido de Lisboa. Petiscos creativos con producto de temporada, carta que cambia cada día. El ambiente es íntimo (12 mesas). Reserva con días de anticipación.',tags:['Petiscos','Temporada','Reserva con días']},
+      {name:'Solar dos Presuntos',location:'Baixa, Rua das Portas de Santo Antão 150',badge:'badge-food',price:'high',desc:'La mejor cocina tradicional portuguesa de Lisboa, con los presuntos (jamones) colgados del techo. El arroz de tamboril, el bacalhau com natas y el leitão son los platos estrella. Desde 1976.',tags:['Tradicional','Desde 1976','Arroz de tamboril']},
+      {name:'Cervejaria Ramiro',location:'Intendente, Av. Almirante Reis 1',badge:'badge-food',price:'high',desc:'La mejor marisquería de Lisboa desde 1956. Las gambas al ajillo, los percebes, las amêijoas à Bulhão Pato y el prego del final son una institución. Abre hasta las 2h de la madrugada.',tags:['Mariscos','Desde 1956','Hasta las 2h']}
+    ]},
+    actividades:{tip:'El Tram 28 es la atracción más disputada de Lisboa — va siempre lleno y los carteristas lo saben. Sube en la parada inicial (Martim Moniz) y guarda bien la cartera.',items:[
+      {name:'Alfama (barrio)',location:'Alfama, al este del centro',badge:'badge-activity',desc:'El barrio más antiguo de Lisboa. Subir hasta el Castillo de São Jorge y bajar despacio parando en cada mirador es la mejor forma de conocer Lisboa. Sin prisa, sin itinerario.',tags:['Gratis','Imprescindible','Fotogénico','Castillo']},
+      {name:'Mosteiro dos Jerónimos',location:'Belém, Praça do Império',badge:'badge-activity',desc:'El monasterio más impresionante de Portugal, joya del estilo manuelino. Aquí está enterrado Vasco da Gama y el poeta Luís de Camões. El claustro es de una delicadeza escultural increíble.',tags:['Patrimonio UNESCO','€€','Vasco da Gama']},
+      {name:'Sintra (excursión)',location:'40 min en tren desde Rossio',badge:'badge-activity',desc:'El pueblo de cuento de hadas Patrimonio Mundial UNESCO. El Palácio da Regaleira con sus túneles iniciáticos y el colorido Palácio da Pena en la cima son únicos en Europa.',tags:['Patrimonio UNESCO','Excursión','Palacios']},
+      {name:'LX Factory',location:'Alcântara, Rua Rodrigues de Faria 103',badge:'badge-activity',desc:'Una fábrica del siglo XIX reconvertida en espacio creativo. Los domingos hay mercado de 10h a 18h — el más interesante de la ciudad. Restaurantes, librerías y tiendas de diseño.',tags:['Mercado domingos','Diseño','Ambiente']},
+      {name:'Fado en vivo (Alfama)',location:'Alfama, varios locales',badge:'badge-activity',desc:'El fado auténtico se escucha en Alfama. Sr. Fado (Rua dos Remédios 176), A Tasca do Chico (Rua do Diário de Notícias 39) o Mesa de Frades son los más recomendados por los lisboetas.',tags:['Fado auténtico','Alfama','Noche']}
+    ]},
+    museos:{tip:'El primer domingo del mes los museos nacionales son gratuitos. El Museu do Azulejo es el más único de Portugal.',items:[
+      {name:'Museu Nacional do Azulejo',location:'Santa Apolónia, Rua da Madre de Deus 4',badge:'badge-museum',desc:'El museo más único de Portugal y uno de los más especiales de Europa. La historia del azulejo portugués desde el siglo XV en un convento del siglo XVI. El panorama de Lisboa en azulejo de 23 metros del siglo XVIII es irrepetible.',tags:['Único en el mundo','€€','Convento','Imprescindible']},
+      {name:'Museu Calouste Gulbenkian',location:'Avenidas Novas, Av. de Berna 45A',badge:'badge-museum',desc:'La colección privada más importante de Portugal. Arte egipcio, islámico, europeo y japonés de altísimo nivel en un edificio moderno rodeado de jardines. Las joyas de Lalique son las piezas más impactantes.',tags:['Arte mundial','€€','Jardines','Lalique']},
+      {name:'MAAT',location:'Belém, Av. Brasília',badge:'badge-museum',desc:'El museo de arte contemporáneo más moderno de Lisboa, en la orilla del Tejo en Belém. El edificio ondulado de Amanda Levete al lado de la central eléctrica renovada es ya una obra de arte.',tags:['Arte contemporáneo','€€','Arquitectura','Tejo']},
+      {name:'Casa Fernando Pessoa',location:'Campo de Ourique, Rua Coelho da Rocha 16',badge:'badge-museum',desc:'La casa donde el poeta Fernando Pessoa vivió los últimos 15 años de su vida. El cuarto y el escritorio donde escribió algunos de los poemas más importantes del siglo XX están preservados.',tags:['Literatura','Pessoa','€','Casa-museo']}
+    ]},
+    comercio:{tip:'Los mejores souvenirs de Lisboa: azulejos artesanales (Fábrica Sant\'Anna), conservas de sardinas diseñadas (A Vida Portuguesa) y productos de corcho.',items:[
+      {name:'A Vida Portuguesa',location:'Chiado, Rua Anchieta 11',badge:'badge-shopping',desc:'La tienda más bonita de Lisboa, especializada en productos portugueses clásicos rediseñados. Conservas de sardinas con packaging de los años 50, corchos, jabones y objetos únicos. Imposible salir sin comprar algo.',tags:['Diseño portugués','Souvenirs únicos','Sardinas']},
+      {name:'LX Factory (mercado domingos)',location:'Alcântara, Rua Rodrigues de Faria 103',badge:'badge-shopping',desc:'El mejor mercado vintage y de diseño de Lisboa, los domingos de 10h a 18h. Ropa de segunda mano de calidad, discos de vinilo, libros, cerámica y joyería artesanal.',tags:['Solo domingos','Vintage','Vinilo']},
+      {name:'Chiado (zona)',location:'Chiado, alrededor de la Rua Garrett',badge:'badge-shopping',desc:'El barrio más elegante de Lisboa. La Livraria Bertrand (la librería más antigua del mundo en funcionamiento, desde 1732), boutiques portuguesas de diseño y la Fnac histórica.',tags:['Elegante','Librería más antigua del mundo','Moda local']},
+      {name:'Fábrica Sant\'Anna',location:'Chiado, Rua do Alecrim 95',badge:'badge-shopping',desc:'La fábrica de azulejos más antigua de Lisboa en funcionamiento continuo desde 1741. Se pueden comprar azulejos pintados a mano y visitar el taller donde los artesanos pintan cada pieza individualmente.',tags:['Azulejos artesanales','Desde 1741','Taller visitable']},
+      {name:'Feira da Ladra',location:'Alfama, Campo de Santa Clara',badge:'badge-shopping',desc:'El mercadillo de Lisboa, martes y sábados. Antigüedades, ropa usada, monedas y cosas que no sabes qué son. El ambiente entre Alfama y Graça es único.',tags:['Martes y sábados','Antigüedades','Alfama']}
+    ]},
+    discotheques:{tip:'Lisboa tiene una escena nocturna única — el barrio de Bairro Alto se convierte en una fiesta en la calle a partir de las 23h. Los clubs de Alcántara son los más grandes y con mejor música.',items:[
+      {name:'Lux Frágil',location:'Santa Apolónia, Av. Infante D. Henrique',badge:'badge-disco',desc:'El club más famoso e importante de Lisboa, con vista al Tejo y al puente 25 de Abril. Cuatro plantas con música diferente en cada una: techno, house, indie y terraza. Fundado con inversión de John Malkovich. El favorito de los lisboetas que entienden de música desde hace 25 años.',tags:['El más famoso de Lisboa','Vistas al Tejo','John Malkovich','Techno y House']},
+      {name:'Music Box',location:'Cais do Sodré, Rua Nova do Carvalho 24',badge:'badge-disco',desc:'El club de la Rua Nova do Carvalho (la famosa "Rua Cor de Rosa"), la calle más nocturna de Lisboa. Música electrónica, indie y pop alternativo en un espacio íntimo y cargado de atmósfera. Conciertos de artistas emergentes internacionales y noches de DJ de calidad.',tags:['Rua Cor de Rosa','Indie','Electrónica','Conciertos']},
+      {name:'Europa Club',location:'Alcântara, Rua da Cintura do Porto de Lisboa',badge:'badge-disco',desc:'El club de música electrónica y techno más underground de Lisboa, en los almacenes del puerto reconvertidos. DJs de la escena europea underground actuando regularmente. El espacio es industrial y el sonido excepcional. El Berlín de Lisboa.',tags:['Underground','Techno','Puerto industrial','Berlín de Lisboa']},
+      {name:'Bairro Alto (bares de calle)',location:'Bairro Alto, alrededor de la Rua do Diário de Notícias',badge:'badge-disco',desc:'El Bairro Alto no es un club — es un barrio entero que se convierte en fiesta callejera a partir de las 23h. Los bares sirven copas para llevar y la gente se junta en la calle. Sin entrada, sin dress code, sin pretensiones. La experiencia más auténtica de la noche lisboeta.',tags:['Calle','Sin entrada','Auténtico','A partir de las 23h']},
+      {name:'Ministerium Club',location:'Baixa, Terreiro do Paço',badge:'badge-disco',desc:'El club más espectacular de Lisboa en las antiguas dependencias del Ministerio de Finanzas, en la impresionante Praça do Comércio frente al Tejo. Techos de 6 metros, arcos históricos y una pista de baile de diseño. Electrónica y house de calidad en un escenario único.',tags:['Praça do Comércio','Espectacular','Histórico','House']}
+    ]},
+    miradores:{tip:'Lisboa tiene los miradores más poéticos de Europa. El mejor momento es el atardecer sobre el Tejo. Nossa Senhora do Monte es el más alto y menos conocido.',items:[
+      {name:'Miradouro de Santa Catarina',location:'Bairro Alto, Rua de Santa Catarina',badge:'badge-mirador',desc:'El mirador más bohemio de Lisboa, el de los hippies, músicos y artistas locales. Vistas al Tejo, al Puente 25 de Abril y a la estatua del Cristo Rey. Siempre hay alguien tocando guitarra, vendiendo capoeira o simplemente con una cerveza mirando el atardecer. Gratis y con el mejor ambiente.',tags:['Gratis','Bohemio','Puente 25 de Abril','Atardecer']},
+      {name:'Miradouro das Portas do Sol',location:'Alfama',badge:'badge-mirador',desc:'El mirador más fotogénico de Alfama, con la vista clásica de los tejados rojos del barrio más antiguo de Lisboa bajando hasta el Tejo. La estatua de San Vicente con el Castelo de São Jorge de fondo es la imagen postal de Lisboa. Siempre lleno pero siempre espectacular.',tags:['Gratis','Fotogénico','Alfama','Vista postal de Lisboa']},
+      {name:'Miradouro de Nossa Senhora do Monte',location:'Graça, Rua da Graça',badge:'badge-mirador',desc:'El mirador más alto de Lisboa y el menos conocido por los turistas — solo los lisboetas que conocen Graça suben aquí. Vista de 180° sobre toda la ciudad, el Castillo, el Tejo y la otra orilla. El atardecer aquí, completamente tranquilo, es el más emotivo de Lisboa.',tags:['Gratis','El más alto','Sin turistas','El mejor atardecer']},
+      {name:'Miradouro de São Pedro de Alcântara',location:'Bairro Alto, Rua de São Pedro de Alcântara',badge:'badge-mirador',desc:'El mirador más elegante de Lisboa, con un jardín con fuente, bancos y estatuas de mármol. Vista directa sobre el Castillo de São Jorge y el barrio del Castelo. Tiene un mapa en azulejo que te identifica cada edificio que ves. El más cómodo para quedarse un rato largo.',tags:['Gratis','Jardín','Castillo enfrente','Mapa en azulejo']},
+      {name:'Castelo de São Jorge (Torre de Ulisses)',location:'Alfama, Rua de Santa Cruz do Castelo',badge:'badge-mirador',desc:'Las murallas del castillo medieval de Lisboa tienen la vista más alta y completa de la ciudad — el centro histórico, el Tejo, Alcántara y el Puente 25 de Abril. La Torre de Ulisses tiene una cámara oscura que proyecta la ciudad en tiempo real en el interior. Entrada de pago incluye castillo y cámara.',tags:['Castillo medieval','€€','Cámara oscura','Vista completa']}
+    ]}
   }
-];
+};
 
-// Coming soon cities placeholder
-const comingSoon = [
-  { id: 'porto', name: 'Porto', country: 'Portugal', flag: '🇵🇹' },
-  { id: 'ibiza', name: 'Ibiza', country: 'España', flag: '🇪🇸' }
-];
+let currentCity='barcelona';
+let currentCat='playas';
+let currentPrice='all';
 
-let selectedCity = cities[0];
-let selectedDay = 0;
-let activeFilters = ['all'];
-
-function renderCities() {
-  const grid = document.getElementById('cityGrid');
-  grid.innerHTML = '';
-  cities.forEach(city => {
-    const btn = document.createElement('div');
-    btn.className = 'city-btn' + (city.id === selectedCity.id ? ' active' : '');
-    btn.innerHTML = `<span class="flag">${city.flag}</span><div class="city-info"><span class="city-name">${city.name}</span><span class="country">${city.country}</span></div>`;
-    btn.onclick = () => { selectedCity = city; selectedDay = 0; renderAll(); };
-    grid.appendChild(btn);
-  });
-  comingSoon.forEach(city => {
-    const btn = document.createElement('div');
-    btn.className = 'city-btn';
-    btn.style.opacity = '0.5';
-    btn.style.cursor = 'default';
-    btn.innerHTML = `<span class="flag">${city.flag}</span><div class="city-info"><span class="city-name">${city.name}</span><span class="coming-soon">Próximo</span></div>`;
-    grid.appendChild(btn);
+function renderCityPills(){
+  const c=document.getElementById('cityPills');
+  c.innerHTML='';
+  Object.keys(data).forEach(id=>{
+    const city=data[id];
+    const pill=document.createElement('div');
+    pill.className='city-pill'+(id===currentCity?' active':'');
+    pill.textContent=city.flag+' '+city.name;
+    pill.onclick=()=>{currentCity=id;currentPrice='all';render();};
+    c.appendChild(pill);
   });
 }
 
-function renderDayTabs() {
-  const tabs = document.getElementById('dayTabs');
-  tabs.innerHTML = '';
-  selectedCity.days.forEach((d, i) => {
-    const tab = document.createElement('div');
-    tab.className = 'day-tab' + (i === selectedDay ? ' active' : '');
-    tab.textContent = d.label;
-    tab.onclick = () => { selectedDay = i; renderItinerary(); renderCities(); renderDayTabs(); };
-    tabs.appendChild(tab);
-  });
+function renderCityIntro(){
+  const city=data[currentCity];
+  document.getElementById('cityIntro').innerHTML=`
+    <div class="city-flag">${city.flag}</div>
+    <div>
+      <h2>${city.name}, ${city.country}</h2>
+      <p>${city.desc}</p>
+      <div class="city-meta-row">
+        <span class="meta-chip"><span>📅</span> ${city.bestTime}</span>
+        <span class="meta-chip"><span>🌡</span> ${city.temp}</span>
+        <span class="meta-chip"><span>💶</span> ${city.moneda}</span>
+        <span class="meta-chip"><span>🗣</span> ${city.idioma}</span>
+      </div>
+    </div>`;
 }
 
-function renderFilters() {
-  document.querySelectorAll('.chip').forEach(chip => {
-    chip.onclick = () => {
-      const f = chip.dataset.filter;
-      if (f === 'all') {
-        activeFilters = ['all'];
-      } else {
-        activeFilters = activeFilters.filter(x => x !== 'all');
-        if (activeFilters.includes(f)) {
-          activeFilters = activeFilters.filter(x => x !== f);
-          if (activeFilters.length === 0) activeFilters = ['all'];
-        } else {
-          activeFilters.push(f);
-        }
-      }
-      document.querySelectorAll('.chip').forEach(c => {
-        c.classList.toggle('active',
-          activeFilters.includes(c.dataset.filter) ||
-          (activeFilters[0] === 'all' && c.dataset.filter === 'all')
-        );
-      });
-      renderItinerary();
-    };
-  });
-}
+function renderSection(){
+  const city=data[currentCity];
+  const catData=city[currentCat];
+  const catNames={playas:'Playas',restaurantes:'Restaurantes',actividades:'Actividades',museos:'Museos',comercio:'Comercio',discotheques:'Discotecas',miradores:'Miradores'};
+  const catDescs={
+    playas:`Las mejores playas y opciones de agua cerca de ${city.name}`,
+    restaurantes:`Dónde comer en ${city.name} — desde clásicos hasta de moda`,
+    actividades:`Lo que hay que hacer y ver en ${city.name}`,
+    museos:`Los museos y espacios culturales imprescindibles`,
+    comercio:`Mercados, tiendas y zonas de compras`,
+    discotheques:`La vida nocturna y los mejores clubs de ${city.name}`,
+    miradores:`Los mejores puntos de vista y panoramas de ${city.name}`
+  };
+  const badgeLabels={beach:'Playa',food:'Restaurante',activity:'Actividad',museum:'Museo',shopping:'Compras',disco:'Club',mirador:'Mirador'};
+  const priceLabels={cheap:'Económico',mid:'Precio medio',high:'Precio alto'};
 
-function renderItinerary() {
-  const day = selectedCity.days[selectedDay];
-  const header = document.getElementById('cityHeader');
-  header.innerHTML = `
-    <div class="city-header-row">
-      <h2>${selectedCity.flag} ${selectedCity.name}</h2>
-      <span class="city-country-badge">${selectedCity.country}</span>
+  const container=document.getElementById('sections');
+
+  let priceFilterHtml='';
+  if(currentCat==='restaurantes'){
+    priceFilterHtml=`
+      <div class="price-filter">
+        <span class="price-filter-label">Precio:</span>
+        <div class="price-chip active all" data-price="all">Todos</div>
+        <div class="price-chip" data-price="cheap">💚 Económico</div>
+        <div class="price-chip" data-price="mid">🟠 Precio medio</div>
+        <div class="price-chip" data-price="high">💜 Precio alto</div>
+      </div>`;
+  }
+
+  let html=`
+    <div class="tip-callout"><p><strong>💡 Consejo:</strong> ${catData.tip}</p></div>
+    <div class="section-header">
+      <h3>${catNames[currentCat]} en ${city.name}</h3>
+      <p>${catDescs[currentCat]}</p>
     </div>
-    <p class="city-desc">${selectedCity.desc}</p>
-    <div class="city-meta">
-      <span class="meta-item"><span class="meta-icon">📅</span> Mejor época: ${selectedCity.bestTime}</span>
-      <span class="meta-item"><span class="meta-icon">🌡</span> ${selectedCity.avgTemp} verano</span>
-      <span class="meta-item"><span class="meta-icon">💶</span> ${selectedCity.currency}</span>
-    </div>
-  `;
+    ${priceFilterHtml}
+    <div class="cards-grid">`;
 
-  const area = document.getElementById('stopsArea');
-  const showAll = activeFilters.includes('all');
-  const visibleStops = day.stops.filter(s => showAll || activeFilters.includes(s.type));
-  const tagLabels = { food: 'Gastronomía', culture: 'Cultura', nature: 'Naturaleza', nightlife: 'Nocturna', shopping: 'Shopping' };
-
-  area.innerHTML = `<div class="day-heading">${day.theme}</div>`;
-
-  if (visibleStops.length === 0) {
-    area.innerHTML += `<div class="empty-state"><div class="icon">🗺️</div><p>No hay paradas con ese filtro para este día</p></div>`;
-  } else {
-    visibleStops.forEach(stop => {
-      area.innerHTML += `
-        <div class="stop-card">
-          <div class="stop-inner">
-            <div class="stop-time">
-              <span class="stop-time-main">${stop.time}</span>
-              <span class="stop-time-period">${stop.period}</span>
+  catData.items.forEach(item=>{
+    const typeKey=item.badge.replace('badge-','');
+    const label=badgeLabels[typeKey]||typeKey;
+    const tagsHtml=item.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+    const priceKey=item.price||null;
+    const hidden=(currentCat==='restaurantes' && currentPrice!=='all' && priceKey!==currentPrice)?'hidden':'';
+    const priceBadge=priceKey?`<span class="card-badge badge-price-${priceKey}">${priceLabels[priceKey]}</span>`:'';
+    html+=`
+      <div class="card ${hidden}" data-price="${priceKey||''}">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-name">${item.name}</div>
+            <div class="card-badges">
+              <span class="card-badge ${item.badge}">${label}</span>
+              ${priceBadge}
             </div>
-            <div class="dot-col"><div class="dot ${stop.type}"></div></div>
-            <div class="stop-body">
-              <div class="stop-name">${stop.name}</div>
-              <div class="stop-detail">${stop.detail}</div>
-            </div>
-            <span class="stop-badge ${stop.type}">${tagLabels[stop.type]}</span>
           </div>
+          <div class="card-location">${item.location}</div>
+          <div class="card-desc">${item.desc}</div>
         </div>
-      `;
+        <div class="card-footer">${tagsHtml}</div>
+      </div>`;
+  });
+
+  html+=`</div>`;
+  container.innerHTML=html;
+
+  if(currentCat==='restaurantes'){
+    document.querySelectorAll('.price-chip').forEach(chip=>{
+      chip.onclick=()=>{
+        currentPrice=chip.dataset.price;
+        document.querySelectorAll('.price-chip').forEach(c=>{
+          c.className='price-chip'+(c.dataset.price===currentPrice?' active '+c.dataset.price:'');
+        });
+        document.querySelectorAll('.card[data-price]').forEach(card=>{
+          const cp=card.dataset.price;
+          card.classList.toggle('hidden', currentPrice!=='all' && cp!==currentPrice);
+        });
+      };
     });
   }
-
-  const tipBox = document.getElementById('tipBox');
-  document.getElementById('tipText').textContent = day.tip;
-  tipBox.style.display = 'block';
 }
 
-function renderAll() {
-  renderCities();
-  renderDayTabs();
-  renderItinerary();
+function renderCatNav(){
+  document.querySelectorAll('.cat-btn').forEach(btn=>{
+    btn.classList.toggle('active',btn.dataset.cat===currentCat);
+  });
 }
 
-renderAll();
-renderFilters();
+function render(){
+  renderCityPills();
+  renderCityIntro();
+  renderCatNav();
+  renderSection();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.querySelectorAll('.cat-btn').forEach(btn=>{
+  btn.onclick=()=>{
+    currentCat=btn.dataset.cat;
+    currentPrice='all';
+    renderCatNav();
+    renderSection();
+    document.querySelector('.main').scrollIntoView({behavior:'smooth'});
+  };
+});
+
+render();
 </script>
 </body>
 </html>
